@@ -9,6 +9,7 @@ const Modal = ({ isOpen, onClose, song }) => {
     const [preview, setPreview] = useState('');
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [isFullLyricVisible, setIsFullLyricVisible] = useState(false);
     useEffect(() => {
         const fetchLyricsAndCategories  = async () => {
             if (song) {
@@ -44,24 +45,49 @@ const Modal = ({ isOpen, onClose, song }) => {
         onClose(); // Cierra el modal después de publicar
     };
 
+    const toggleFullLyrics = () => {
+        setIsFullLyricVisible(!isFullLyricVisible);
+    };
+
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ease-in-out">
-  <div className="relative top-1/4 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white transition-transform duration-300 ease-in-out transform-gpu">
-                <div className="mb-4">
-                    <h2 className="text-xl font-semibold mb-2">{song.title}</h2>
-                    <p className="text-gray-700">{preview || 'Loading lyrics...'}</p>
-                    {/* Selector para la categoría de publicación */}
-                    <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} className="mb-4">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full z-50">
+            <div className="relative top-20 mx-auto p-4 sm:p-6 border w-11/12 max-w-md sm:max-w-lg shadow-lg rounded-md bg-white">
+                <div className="mb-4 overflow-y-auto max-h-96">
+                    <h2 className="text-base sm:text-lg font-semibold mb-2 text-gray-800">{song.title}</h2>
+                    <p className="text-sm text-gray-700 mb-4">
+                        {isFullLyricVisible ? lyrics.join('\n') : preview}
+                    </p>
+                    <button
+                        onClick={toggleFullLyrics}
+                        className="text-blue-500 hover:text-blue-700 text-sm"
+                    >
+                        {isFullLyricVisible ? 'Ver menos' : 'Ver más'}
+                    </button>
+                    <select 
+                        value={selectedCategory} 
+                        onChange={e => setSelectedCategory(e.target.value)} 
+                        className="w-full p-2 mb-4 text-sm bg-gray-100 rounded-lg focus:bg-white border-gray-300"
+                    >
                         {categories.map((category) => (
                             <option key={category._id} value={category._id}>{category.categoryType}</option>
                         ))}
                     </select>
                 </div>
-                <div className="flex justify-between items-center">
-                    <button onClick={onClose} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Cerrar</button>
-                    <button onClick={handlePublish} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Publicar</button>
+                <div className="flex justify-around items-center">
+                    <button 
+                        onClick={onClose} 
+                        className="py-3 px-5 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
+                    >
+                        Cerrar
+                    </button>
+                    <button 
+                        onClick={handlePublish} 
+                        className="py-3 px-5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                    >
+                        Publicar
+                    </button>
                 </div>
             </div>
         </div>
