@@ -52,5 +52,13 @@ class SongService {
         return await response.json();
     }
 
+    async getSongByLyricId(songId) {
+        const response = await fetch(`${this.URI}/byLyric/${songId}`, {
+
+        });
+        const song = await response.json();
+        return song;
+    }
+
 }
 export default SongService;
