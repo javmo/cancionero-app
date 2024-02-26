@@ -60,5 +60,15 @@ class SongService {
         return song;
     }
 
+    async searchSongByLyrics(query) {
+        const response = await fetch(`${this.URI}/search/byLyricText?q=${query}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'GET'
+        });
+        return await response.json();
+    }
+
 }
 export default SongService;
