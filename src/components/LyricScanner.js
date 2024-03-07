@@ -1,70 +1,88 @@
 import React, { useState, useCallback } from 'react';
 import Tesseract from 'tesseract.js';
+import  TextModal  from './TextModal';
 
 const LyricScanner = ({ onScan }) => {
-  const [isScanning, setIsScanning] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [image, setImage] = useState(null);
+  const [recognizedText, setRecognizedText] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  
 
-  const scanLyrics = useCallback(async () => {
+
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const imageFile = event.target.files[0];
+      setImage(imageFile);
+    }
+  };
+
+  const extractText = useCallback(async () => {
+    if (!image) {
+      console.error('No hay imagen seleccionada');
+      return;
+    }
+
     try {
-      setIsScanning(true);
-      const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
-      const videoElement = document.getElementById('videoElement'); // Obtener el elemento de video
-      videoElement.srcObject = videoStream; // Asignar el stream de video al elemento de video
-      videoElement.play(); // Comenzar la reproducción del video
-      
-      const image = await takePhoto(videoElement); // Capturar una foto del video
-      
-      videoStream.getTracks().forEach(track => track.stop());
-      
+      setIsProcessing(true);
       const { data: { text } } = await Tesseract.recognize(image, 'spa', {
         logger: m => console.log(m)
       });
-      setIsScanning(false);
-      return text;
-    } catch (error) {
-      setIsScanning(false);
-      console.error('Error al escanear la letra:', error);
-      throw error;
-    }
-  }, []);
 
-  const handleScan = () => {
-    scanLyrics()
-      .then(scannedLyrics => {
-        onScan(scannedLyrics);
-      })
-      .catch(error => {
-        // Manejar el error aquí...
-      });
+      setRecognizedText(text);
+      setShowModal(true); // Mostrar modal al obtener el texto
+      onScan(text);
+    } catch (error) {
+      console.error('Error al procesar la imagen:', error);
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [image, onScan]);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(recognizedText).then(() => {
+      // Notificar al usuario que el texto ha sido copiado.
+      console.log('Texto copiado al portapapeles');
+    }).catch(err => {
+      console.log('Algo salió mal al copiar el texto', err);
+    });
   };
 
   return (
-    <div className="mb-6">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        O escanea la letra con la cámara
-      </label>
-      <video id="videoElement" className="w-full max-h-96 bg-black" style={{ maxHeight: '400px' }}></video>
-      <button
-        type="button"
-        onClick={handleScan}
-        disabled={isScanning}
-        className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white ${isScanning ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
-      >
-        {isScanning ? 'Escaneando...' : 'Escanear'}
-      </button>
+    <div className="p-4">
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Selecciona o toma una foto para escanear
+        </label>
+        <input 
+          type="file" 
+          onChange={handleImageChange} 
+          accept="image/*" 
+          className="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+          disabled={isProcessing}
+        />
+      </div>
+      <div className="mb-4">
+        <button
+          onClick={extractText}
+          disabled={isProcessing || !image}
+          className={`w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
+        >
+          {isProcessing ? 'Procesando...' : 'Extraer Texto'}
+        </button>
+      </div>
+      {/* Modal para mostrar y editar el texto reconocido */}
+      {showModal && (
+        <TextModal
+          isProcessing={isProcessing}
+          recognizedText={recognizedText}
+          setRecognizedText={setRecognizedText}
+          closeModal={() => setShowModal(false)}
+          copyToClipboard={copyToClipboard}
+        />
+      )}
     </div>
   );
 };
-
-async function takePhoto(videoElement) {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-  context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-  const dataURL = canvas.toDataURL('image/png');
-  const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-  return { blob, dataURL };
-}
 
 export default LyricScanner;

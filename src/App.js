@@ -8,6 +8,7 @@ import Cancionero from './components/Cancionero';
 import PaginaPrincipal from './components/PaginaPrincipal';
 import SongScraperPreview from './components/SongScraperPreview';
 import SongAdder  from './components/SongAdder';
+import SongCreationWizard from './components/wizard/SongCreationWizard';
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
         <Route path="/cancionero" element={<Cancionero />} />
         <Route path="/scrapingPreview" element={<SongScraperPreview />} />
         <Route path="/addSong" element={<SongAdder />} />
+        <Route path="/addSongWizard" element={<SongCreationWizard />} />
         {/* Define otras rutas aquí */}
       </Routes>
     </Router>
