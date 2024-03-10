@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import TitleStep from './TitleStep'; // Asegúrate de que estas rutas sean correctas
+import TitleStep from './TitleStep';
 import LyricsStep from './LyricsStep';
 import PreviewStep from './PreviewStep';
+import ProgressBar from './ProgressBar';
 
 const steps = [
   TitleStep,
@@ -16,27 +17,15 @@ const SongCreationWizard = () => {
     lyrics: '',
   });
 
-  const goNextStep = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
+  const goNextStep = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+  const goPrevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
+  const handleDataChange = (newData) => setSongData({ ...songData, ...newData });
 
-  const goPrevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const handleDataChange = (newData) => {
-    setSongData({ ...songData, ...newData });
-  };
-
-  // Asegúrate de que obtienes el componente actual basado en el paso en que te encuentras
   const CurrentStepComponent = steps[currentStep];
 
   return (
-    <div className="wizard-container">
+    <div className="wizard-container mx-auto my-10 p-4 bg-white shadow-lg rounded-lg max-w-4xl">
+      <ProgressBar currentStep={currentStep} totalSteps={steps.length} />
       <CurrentStepComponent 
         data={songData}
         onDataChange={handleDataChange}

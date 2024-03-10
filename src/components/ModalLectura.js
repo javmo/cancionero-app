@@ -5,13 +5,19 @@ const ModalLectura = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-5 rounded-lg max-w-lg max-h-full overflow-auto">
-        <button onClick={onClose} className="float-right font-bold">X</button>
-        {children}
+    <div className="fixed inset-0 z-50 overflow-auto bg-gray-500 bg-opacity-75 flex">
+      <div className="relative p-4 bg-white w-full max-w-lg m-auto flex-col flex rounded-lg shadow-lg">
+        <button onClick={onClose} className="absolute top-0 right-0 mt-4 mr-4">
+          {/* Asegúrate de tener un ícono o texto aquí para cerrar el modal */}
+          <span>&times;</span>
+        </button>
+        <div className="overflow-y-auto max-h-[70vh]"> {/* Esta es la parte importante para el scroll */}
+          {children}
+        </div>
       </div>
     </div>
   );
 };
 
 export default ModalLectura;
+
