@@ -8,16 +8,16 @@ export const mockSongData =   {
     "tono": "RE",
     "etiquetas": [
         "",
-        "Misa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual",
-        "Estilo - AlabanzaGénero musical - Folclore argentinoMisa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual",
         "Tema - JesúsTiempo Litúrgico - Pascual",
+        "Misa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual",
         "Tiempo Litúrgico - Pascual",
-        "Género musical - Folclore argentinoMisa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual"
+        "Género musical - Folclore argentinoMisa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual",
+        "Estilo - AlabanzaGénero musical - Folclore argentinoMisa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual"
     ],
     "idPastoralMusica": "114",
     "partes": [
         {
-            "letra": "\n",
+            "letra": "",
             "acordes": [
                 "RE",
                 "",
@@ -27,12 +27,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                12,
+                0,
+                5,
+                0,
+                0,
+                10,
+                0
             ]
         },
         {
             "letra": "Alégrense en el cielo los ángeles que cantan. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -45,12 +59,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                12,
+                0,
+                7,
+                0,
+                0,
+                10,
+                0
             ]
         },
         {
             "letra": "Alégrense en la tierra los ministros de Dios. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -62,11 +90,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                4,
+                0,
+                9,
+                0,
+                7,
+                0,
+                5
             ]
         },
         {
             "letra": "Por la victoria grande del Todopoderoso ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -77,14 +115,28 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                10,
+                0,
+                0,
+                3,
+                0,
+                0,
+                8
             ]
         },
         {
             "letra": "resuene la trompeta de la salvación. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -97,12 +149,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                9,
+                0,
+                6,
+                0,
+                0,
+                8,
+                0
             ]
         },
         {
             "letra": "Alégrense la tierra de golpe iluminada ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -115,12 +181,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                4,
+                0,
+                0,
+                10,
+                0,
+                3,
+                0,
+                0,
+                9,
+                0
             ]
         },
         {
             "letra": "por una luz tan pura como jamás brilló. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -132,11 +212,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                5,
+                0,
+                8,
+                0,
+                4,
+                0,
+                9
             ]
         },
         {
             "letra": "La oscuridad vencida ya no sirve de nada. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -147,17 +237,36 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE7"
+                "RE",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                3,
+                0,
+                0,
+                12,
+                0,
+                0,
+                8,
+                0,
+                0,
+                7,
+                0,
+                0,
+                2,
+                0
             ]
         },
         {
             "letra": "La piedra se ha corrido, la luz resucitó. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -182,14 +291,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -214,14 +351,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -229,11 +394,17 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                16
             ]
         },
         {
             "letra": "El Señor esté con ustedes. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -241,14 +412,25 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#7",
+                "FA#",
+                "7",
                 "",
                 "SIm"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                6,
+                0,
+                0,
+                5
             ]
         },
         {
             "letra": "Con tu espíritu también. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -256,11 +438,17 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                14
             ]
         },
         {
             "letra": "Levantemos el corazón. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -268,14 +456,25 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#7",
+                "FA#",
+                "7",
                 "",
                 "SIm"
+            ],
+            "espacios_entre_acordes": [
+                5,
+                0,
+                0,
+                8,
+                0,
+                0,
+                11
             ]
         },
         {
             "letra": "Lo tenemos levantado hacia el Señor. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -290,11 +489,24 @@ export const mockSongData =   {
                 "",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                11,
+                0,
+                0,
+                9
             ]
         },
         {
             "letra": "Y demos gracias al Señor nuestro Dios. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -302,14 +514,25 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#7",
+                "FA#",
+                "7",
                 "",
                 "SIm"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                7
             ]
         },
         {
             "letra": "Es justo y necesario. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -317,14 +540,25 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#7",
+                "FA#",
+                "7",
                 "",
                 "SIm"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                10,
+                0,
+                0,
+                7
             ]
         },
         {
             "letra": "Realmente es justo y necesario ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -333,11 +567,18 @@ export const mockSongData =   {
                 "",
                 "",
                 "LA"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                23
             ]
         },
         {
             "letra": "que alabemos con toda la voz, ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -352,11 +593,24 @@ export const mockSongData =   {
                 "",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                9,
+                0,
+                0,
+                11,
+                0,
+                0,
+                5
             ]
         },
         {
             "letra": "al Dios invisible, Padre todopoderoso ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -367,17 +621,36 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE7"
+                "RE",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                10,
+                0,
+                0,
+                8,
+                0,
+                0,
+                9,
+                0,
+                0,
+                2,
+                0
             ]
         },
         {
             "letra": "y a su único Hijo, nuestro Señor Jesús. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -402,14 +675,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -434,14 +735,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -454,12 +783,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                9,
+                0,
+                5,
+                0,
+                0,
+                12,
+                0
             ]
         },
         {
             "letra": "El pagó la deuda de nuestra propia culpa ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -472,12 +815,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                5,
+                0,
+                0,
+                10,
+                0,
+                7,
+                0,
+                0,
+                11,
+                0
             ]
         },
         {
             "letra": "por siempre mantenida desde el tiempo de Adán. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -489,11 +846,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                11,
+                0,
+                6,
+                0,
+                6
             ]
         },
         {
             "letra": "Y con su propia sangre derramada inocente, ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -504,14 +871,28 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                12,
+                0,
+                0,
+                9,
+                0,
+                0,
+                9
             ]
         },
         {
             "letra": "borró nuestra sentencia por el primer error. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -524,12 +905,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                13,
+                0,
+                8,
+                0,
+                0,
+                10,
+                0
             ]
         },
         {
             "letra": "Estas son las fiestas y es esta nuestra Pascua ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -542,12 +937,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                3,
+                0,
+                0,
+                9,
+                0,
+                5,
+                0,
+                0,
+                9,
+                0
             ]
         },
         {
             "letra": "en la que inmolamos al Cordero de Dios. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -559,11 +968,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                4,
+                0,
+                11,
+                0,
+                7,
+                0,
+                13
             ]
         },
         {
             "letra": "Que pinten con su sangre las puertas de los fieles ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -574,17 +993,36 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE7"
+                "RE",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                5,
+                0,
+                0,
+                9,
+                0,
+                0,
+                8,
+                0,
+                0,
+                9,
+                0,
+                0,
+                3,
+                0
             ]
         },
         {
             "letra": "pues sólo por la sangre viene la salvación. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -609,14 +1047,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -641,14 +1107,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -661,12 +1155,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                9,
+                0,
+                6,
+                0,
+                0,
+                7,
+                0
             ]
         },
         {
             "letra": "Esta es la noche en que antiguamente ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -679,12 +1187,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                3,
+                0,
+                0,
+                10,
+                0,
+                6,
+                0,
+                0,
+                9,
+                0
             ]
         },
         {
             "letra": "rescataste de Egipto al pueblo de Israel, ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -696,11 +1218,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                3,
+                0,
+                13,
+                0,
+                4,
+                0,
+                6
             ]
         },
         {
             "letra": "abriendo en el Mar Rojo un camino seguro ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -711,14 +1243,28 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                8,
+                0,
+                0,
+                6,
+                0,
+                0,
+                6
             ]
         },
         {
             "letra": "dejando derrotado al Faraón aquel. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -731,12 +1277,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                9,
+                0,
+                6,
+                0,
+                0,
+                9,
+                0
             ]
         },
         {
             "letra": "Esta es la noche que devuelve la gracia, ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -749,12 +1309,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                5,
+                0,
+                0,
+                10,
+                0,
+                5,
+                0,
+                0,
+                7,
+                0
             ]
         },
         {
             "letra": "lo humano y lo divino en franca comunión. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -766,11 +1340,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                3,
+                0,
+                9,
+                0,
+                6,
+                0,
+                8
             ]
         },
         {
             "letra": "Bendita sea la culpa de Adán y su pecado ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -781,17 +1365,36 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE7"
+                "RE",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                4,
+                0,
+                0,
+                9,
+                0,
+                0,
+                11,
+                0,
+                0,
+                8,
+                0,
+                0,
+                3,
+                0
             ]
         },
         {
             "letra": "que mereció tan noble y tan grande Redentor. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -816,14 +1419,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -848,14 +1479,42 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA7",
+                "LA",
+                "7",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                5,
+                0,
+                0,
+                1,
+                0,
+                0,
+                4,
+                0,
+                3,
+                0,
+                0,
+                5,
+                0,
+                0,
+                5,
+                0,
+                0,
+                4,
+                0,
+                0,
+                1
             ]
         },
         {
             "letra": "¡Alégrense de corazón!  ¡Alégrense! ¡Jesús resucitó! ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -868,12 +1527,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                3,
+                0,
+                0,
+                10,
+                0,
+                8,
+                0,
+                0,
+                8,
+                0
             ]
         },
         {
             "letra": "El cirio consagrado que hicieron las abejas ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -886,12 +1559,26 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                4,
+                0,
+                0,
+                15,
+                0,
+                6,
+                0,
+                0,
+                6,
+                0
             ]
         },
         {
             "letra": "que lo encuentre encendido el lucero matinal; ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -903,11 +1590,21 @@ export const mockSongData =   {
                 "SIm",
                 "",
                 "FA#m"
+            ],
+            "espacios_entre_acordes": [
+                4,
+                0,
+                8,
+                0,
+                4,
+                0,
+                10
             ]
         },
         {
             "letra": "que arda eternamente como señal que Cristo ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -919,11 +1616,21 @@ export const mockSongData =   {
                 "",
                 "",
                 "LA"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                11,
+                0,
+                0,
+                12
             ]
         },
         {
             "letra": "reina por los siglos de los siglos, ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -934,12 +1641,24 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA7"
+                "LA",
+                "7"
+            ],
+            "espacios_entre_acordes": [
+                0,
+                0,
+                0,
+                12,
+                0,
+                0,
+                11,
+                0
             ]
         },
         {
             "letra": "Reina por los siglos de los siglos. ",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         },
         {
             "letra": "",
@@ -951,11 +1670,21 @@ export const mockSongData =   {
                 "",
                 "",
                 "RE"
+            ],
+            "espacios_entre_acordes": [
+                2,
+                0,
+                0,
+                2,
+                0,
+                0,
+                2
             ]
         },
         {
             "letra": "Amee--ee--én.",
-            "acordes": []
+            "acordes": [],
+            "espacios_entre_acordes": []
         }
     ]
 };

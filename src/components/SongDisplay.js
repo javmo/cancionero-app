@@ -1,69 +1,64 @@
 import React, { useState } from 'react';
 import { transposeChord } from '../utils/transposeChord';
 
-const CHORD_SPACE_WIDTH = 53.04; // ancho del espacio para los acordes en píxeles
+const SPACE_UNIT = 8.84; // ancho del espacio unitario en píxeles
 
 const SongDisplay = ({ song }) => {
     const [currentTone, setCurrentTone] = useState(song.tono);
 
     const handleToneChange = (increment) => {
-        setCurrentTone(transposeChord(currentTone, increment));
+        setCurrentTone(prevTone => transposeChord(prevTone, increment));
     };
 
-    const renderChord = (chord, isSpace) => {
-        if (isSpace) {
-            // Si es un espacio, retornar un div con un ancho fijo.
-            return <div style={{ display: 'inline-block', width: `${CHORD_SPACE_WIDTH}px` }}>&nbsp;</div>;
-        } else {
-            // Si es un acorde, transponer y retornar como superíndice.
-            return <sup className="chord">{transposeChord(chord, currentTone - song.tono)}</sup>;
-        }
-    };
+    // Esta función renderiza los acordes con los espacios correspondientes entre ellos.
+    const renderChordsLine = (acordes, espacios) => {
+        let renderedLine = [];
+        let currentSpaceWidth = 0;
 
-    const combineLyricsAndChords = (letra, acordesArray) => {
-        const combined = [];
-        let acordeIndex = 0;
-
-        // Procesar cada palabra y acorde
-        letra.split(' ').forEach((word, index) => {
-            if (acordesArray[acordeIndex] === '') {
-                // Si el elemento de acorde actual es un espacio, añadir el espacio para acordes
-                combined.push(renderChord('', true));
-                acordeIndex++; // Mover al siguiente elemento de acorde
+        acordes.forEach((chord, index) => {
+            // Agrega espacio antes del acorde si es necesario.
+            if (espacios[index] > 0) {
+                currentSpaceWidth += espacios[index] * SPACE_UNIT;
             }
 
-            if (acordesArray[acordeIndex]) {
-                // Si el elemento de acorde actual es un acorde, añadir el acorde
-                combined.push(renderChord(acordesArray[acordeIndex], false));
-                acordeIndex++; // Mover al siguiente elemento de acorde
-            }
+            if (chord) {
+                // Si hay un espacio acumulado, inserta un span con el ancho total de los espacios antes del acorde.
+                if (currentSpaceWidth > 0) {
+                    renderedLine.push(
+                        <span style={{ display: 'inline-block', width: `${currentSpaceWidth}px` }} key={`space-${index}`}></span>
+                    );
+                    currentSpaceWidth = 0; // Restablece el ancho acumulado de espacio después de agregar el span.
+                }
 
-            // Añadir la palabra actual
-            combined.push(<span key={`word-${index}`}>{word} </span>);
+                // Agrega el acorde.
+                renderedLine.push(
+                    <sup key={`chord-${index}`}>{transposeChord(chord, currentTone - song.tono)}</sup>
+                );
+            }
         });
 
-        // Agregar espacios al final si hay acordes restantes
-        while (acordeIndex < acordesArray.length) {
-            if (acordesArray[acordeIndex] === '') {
-                combined.push(renderChord('', true));
-            } else {
-                combined.push(renderChord(acordesArray[acordeIndex], false));
-            }
-            acordeIndex++;
+        // Si queda espacio sin utilizar al final, agregalo también.
+        if (currentSpaceWidth > 0) {
+            renderedLine.push(
+                <span style={{ display: 'inline-block', width: `${currentSpaceWidth}px` }} key="final-space"></span>
+            );
         }
 
-        return <div className="line">{combined}</div>;
+        return renderedLine;
     };
 
     return (
         <div className="song-display">
             <h1>{song.titulo}</h1>
-            <h2>Interprete: {song.interprete}</h2>
-            <h3>Álbum: {song.album}</h3>
+            <h2>{song.interprete}</h2>
+            <h3>{song.album}</h3>
             <div>Tono actual: {currentTone}</div>
             {song.partes.map((parte, index) => (
                 <div key={index} className="parte">
-                    {combineLyricsAndChords(parte.letra, parte.acordes)}
+                    <p>{parte.letra}</p>
+                    <div className="chords">
+                        {renderChordsLine(parte.acordes, parte.espacios_entre_acordes)}
+                    </div>
                 </div>
             ))}
             <div>
@@ -75,13 +70,3 @@ const SongDisplay = ({ song }) => {
 };
 
 export default SongDisplay;
-
-
-
-
-
-
-
-
-
-
