@@ -15,8 +15,9 @@ const CancionesRecomendadas = () => {
       setIsLoading(true); // Comenzar a mostrar el indicador de carga
       try {
         const openiaService = new OpeniaService();
-        const recomendaciones = await openiaService.getRecomendations();
-
+        const response = await openiaService.getRecomendations();
+        const recomendaciones = response.lecturas; // Ajustamos para acceder al array de lecturas
+  
         let cancionesConDetalles = [];
         for (const lectura of recomendaciones) {
           for (const detalle of lectura.detalles) {
@@ -25,16 +26,16 @@ const CancionesRecomendadas = () => {
             if (cancion) {
               cancionesConDetalles.push({
                 ...cancion,
-                tipoLectura: lectura.lectura,
+                tipoLectura: lectura.tipo_lectura,
                 similitud: detalle.similitud
               });
             }
           }
         }
-
+  
         // Ordena las canciones antes de establecer el estado
         cancionesConDetalles = ordenarCanciones(cancionesConDetalles);
-
+  
         // Establece el estado de `lecturas` con las canciones ya ordenadas
         setLecturas(cancionesConDetalles);
       } catch (error) {
@@ -42,7 +43,7 @@ const CancionesRecomendadas = () => {
       }
       setIsLoading(false); // Ocultar el indicador de carga
     };
-
+  
     fetchData();
   }, [orden]);
 
