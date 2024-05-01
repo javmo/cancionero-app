@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate desde React Router
 import LyricService from '../services/LyricService';
-import LyricPublishService from '../services/LyricPublishService'; // Asume que tienes un servicio similar
-import CategoryService from '../services/CategoryService'; // Asume que tienes este servicio para obtener el orden
-import LyricsPublish from '../models/LyricsPublish'; // Asume que tienes este modelo
+import LyricPublishService from '../services/LyricPublishService';
+import CategoryService from '../services/CategoryService';
+import LyricsPublish from '../models/LyricsPublish';
+import SongChordSelector from './SongChordSelector';
 
 const Modal = ({ isOpen, onClose, song }) => {
     const [lyrics, setLyrics] = useState([]);
@@ -10,43 +12,43 @@ const Modal = ({ isOpen, onClose, song }) => {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [isFullLyricVisible, setIsFullLyricVisible] = useState(false);
+    const navigate = useNavigate(); // Obtenemos la función navigate desde React Router
+
     useEffect(() => {
-        const fetchLyricsAndCategories  = async () => {
+        const fetchLyricsAndCategories = async () => {
             if (song) {
                 const publishService = new LyricPublishService();
                 const lyricService = new LyricService();
                 const songLyrics = await lyricService.getLyric(song.lyric);
                 const lyricsArray = Array.isArray(songLyrics.text) ? songLyrics.text : [songLyrics.text];
                 setLyrics(lyricsArray);
-                // Crear una vista previa acortada de los versos
-                const previewText = lyricsArray.slice(0, 3).join('\n').substring(0, 150); // Ajusta según tus necesidades
+                const previewText = lyricsArray.slice(0, 3).join('\n').substring(0, 150);
                 setPreview(previewText + (lyricsArray.join('\n').length > 150 ? '...' : ''));
             }
             const categoryService = new CategoryService();
-            const fetchedCategories = await categoryService.getCategories(); // Asume este método devuelve las categorías
+            const fetchedCategories = await categoryService.getCategories();
             setCategories(fetchedCategories);
             if (fetchedCategories.length > 0) {
-                setSelectedCategory(fetchedCategories[0]._id); // Establecer por defecto el ID de la primera categoría disponible
+                setSelectedCategory(fetchedCategories[0]._id);
             }
         };
 
-        fetchLyricsAndCategories ();
+        fetchLyricsAndCategories();
     }, [song]);
 
     const handlePublish = async () => {
         const publishService = new LyricPublishService();
-        const lyricPub = new LyricsPublish(song._id,selectedCategory);
-        // Preparar el cuerpo de la solicitud
-
-        console.log(lyricPub.toJson()); // Asegúrate de que el cuerpo de la solicitud sea correcto
-
-        // Llamar al método de publicación con el cuerpo de la solicitud
+        const lyricPub = new LyricsPublish(song._id, selectedCategory);
         await publishService.postLyricPublish(lyricPub.toJson());
-        onClose(); // Cierra el modal después de publicar
+        onClose();
     };
 
     const toggleFullLyrics = () => {
         setIsFullLyricVisible(!isFullLyricVisible);
+    };
+
+    const handleNavigateToSongChordSelector = () => {
+        navigate(`/songChordSelector/${song._id}`); // Reemplaza '/ruta-a-tu-song-chord-selector' con la ruta real de tu componente SongChordSelector
     };
 
     if (!isOpen) return null;
@@ -65,9 +67,9 @@ const Modal = ({ isOpen, onClose, song }) => {
                     >
                         {isFullLyricVisible ? 'Ver menos' : 'Ver más'}
                     </button>
-                    <select 
-                        value={selectedCategory} 
-                        onChange={e => setSelectedCategory(e.target.value)} 
+                    <select
+                        value={selectedCategory}
+                        onChange={e => setSelectedCategory(e.target.value)}
                         className="w-full p-2 mb-4 text-sm bg-gray-100 rounded-lg focus:bg-white border-gray-300"
                     >
                         {categories.map((category) => (
@@ -76,14 +78,20 @@ const Modal = ({ isOpen, onClose, song }) => {
                     </select>
                 </div>
                 <div className="flex justify-around items-center">
-                    <button 
-                        onClick={onClose} 
+                    <button
+                        onClick={onClose}
                         className="py-3 px-5 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
                     >
                         Cerrar
                     </button>
                     <button 
-                        onClick={handlePublish} 
+                        onClick={handleNavigateToSongChordSelector} // Aquí manejamos la navegación al hacer clic en el botón
+                        className="py-3 px-5 bg-green-500 text-white text-sm rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                    >
+                    Acrodes
+                    </button>
+                    <button
+                        onClick={handlePublish}
                         className="py-3 px-5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
                     >
                         Publicar
@@ -95,4 +103,5 @@ const Modal = ({ isOpen, onClose, song }) => {
 };
 
 export default Modal;
+
 

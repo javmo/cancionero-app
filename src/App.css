@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .slick-dots-custom li button:before {
+      @apply text-sm !important; /* Esto hará que los puntos sean más grandes */
+      color: #64a9f8 !important; /* Establece el color de los puntos no activos */
+      opacity: 1 !important; /* Hace que los puntos sean completamente opacos */
+    }
+    
+    .slick-dots-custom li.slick-active button:before {
+      color: #053fb1 !important; /* Establece el color de los puntos activos */
+      opacity: 1 !important; /* Opacidad de los puntos activos */
+    }
+  
+    .slick-slide-custom {
+      @apply border border-blue-200 rounded-lg shadow-md !important; /* Esto agrega un borde y sombra */
+    }
+
+    .slick-slide-custom {
+        @apply border border-blue-200 rounded-lg shadow-md !important; /* Esto agrega un borde y sombra */
+      }
+  }

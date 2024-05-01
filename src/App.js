@@ -9,6 +9,7 @@ import PaginaPrincipal from './components/PaginaPrincipal';
 import SongScraperPreview from './components/SongScraperPreview';
 import SongAdder  from './components/SongAdder';
 import SongCreationWizard from './components/wizard/SongCreationWizard';
+import SongChordSelector from './components/SongChordSelector';
 
 function App() {
   
@@ -24,11 +25,12 @@ function App() {
         <Route path="/scrapingPreview" element={<SongScraperPreview />} />
         <Route path="/addSong" element={<SongAdder />} />
         <Route path="/addSongWizard" element={<SongCreationWizard />} />
+        <Route path="/songChordSelector/:songId" element={<SongChordSelector />} />
         {/* Define otras rutas aquí */}
       </Routes>
     </Router>
   );
 }
 
-
 export default App;
+

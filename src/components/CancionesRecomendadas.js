@@ -82,14 +82,14 @@ const CancionesRecomendadas = () => {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500"></div>
         </div>
       ) : (
-        <Slider {...mainSettings}>
+        <Slider {...mainSettings} className="slick-dots-custom">
           {lecturas.map((lectura, indexLectura) => (
             <div key={indexLectura} className={slideContainerStyle}>
               <h3 className="text-lg font-semibold mb-2">{lectura.tipo_lectura}</h3>
               {lectura.detalles.length > 0 ? (
-                <div className="space-y-2 overflow-y-auto max-h-60">
+                <div className="space-y-2 overflow-y-auto max-h-40">
                   {lectura.detalles.map((detalle, indexDetalle) => (
-                    <div key={indexDetalle} onClick={() => handleSongSelect(detalle)} className="flex justify-between items-center p-3 bg-white shadow rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
+                    <div key={indexDetalle} onClick={() => handleSongSelect(detalle)} className="flex justify-between items-center p-2 bg-white shadow rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
                       <div className="flex-grow">
                         <p className="text-sm md:text-md font-medium text-gray-800">{detalle.cancion.title}</p>
                       </div>

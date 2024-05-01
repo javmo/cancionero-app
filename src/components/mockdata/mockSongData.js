@@ -1,5 +1,5 @@
 export const mockSongData =   {
-    "titulo": "Pregón Pascual",
+    "title": "Pregón Pascual",
     "autores": [
         "Texto Litúrgico adaptado"
     ],
@@ -8,16 +8,16 @@ export const mockSongData =   {
     "tono": "RE",
     "etiquetas": [
         "",
-        "Tema - JesúsTiempo Litúrgico - Pascual",
         "Misa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual",
         "Tiempo Litúrgico - Pascual",
         "Género musical - Folclore argentinoMisa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual",
+        "Tema - JesúsTiempo Litúrgico - Pascual",
         "Estilo - AlabanzaGénero musical - Folclore argentinoMisa - Oraciones CantadasTema - JesúsTiempo Litúrgico - Pascual"
     ],
     "idPastoralMusica": "114",
     "partes": [
         {
-            "letra": "",
+            "letra": "\n",
             "acordes": [
                 "RE",
                 "",
@@ -27,8 +27,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -59,8 +59,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -89,7 +89,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 4,
@@ -98,7 +99,8 @@ export const mockSongData =   {
                 0,
                 7,
                 0,
-                5
+                5,
+                0
             ]
         },
         {
@@ -115,10 +117,11 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -129,8 +132,9 @@ export const mockSongData =   {
                 0,
                 3,
                 0,
+                8,
                 0,
-                8
+                0
             ]
         },
         {
@@ -149,8 +153,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -181,8 +185,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 4,
@@ -211,7 +215,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 5,
@@ -220,7 +225,8 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
-                9
+                9,
+                0
             ]
         },
         {
@@ -237,14 +243,13 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE",
-                "7"
+                "RE7",
+                ""
             ],
             "espacios_entre_acordes": [
                 3,
@@ -254,7 +259,6 @@ export const mockSongData =   {
                 0,
                 0,
                 8,
-                0,
                 0,
                 7,
                 0,
@@ -291,10 +295,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -319,8 +324,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -351,10 +357,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -379,8 +386,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -393,12 +401,14 @@ export const mockSongData =   {
             "acordes": [
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
                 0,
-                16
+                16,
+                0
             ]
         },
         {
@@ -412,10 +422,10 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#",
-                "7",
+                "FA#7",
                 "",
-                "SIm"
+                "SIm",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -423,8 +433,8 @@ export const mockSongData =   {
                 0,
                 6,
                 0,
-                0,
-                5
+                5,
+                0
             ]
         },
         {
@@ -437,12 +447,14 @@ export const mockSongData =   {
             "acordes": [
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
                 0,
-                14
+                14,
+                0
             ]
         },
         {
@@ -456,10 +468,10 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#",
-                "7",
+                "FA#7",
                 "",
-                "SIm"
+                "SIm",
+                ""
             ],
             "espacios_entre_acordes": [
                 5,
@@ -467,8 +479,8 @@ export const mockSongData =   {
                 0,
                 8,
                 0,
-                0,
-                11
+                11,
+                0
             ]
         },
         {
@@ -488,7 +500,9 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -500,7 +514,9 @@ export const mockSongData =   {
                 11,
                 0,
                 0,
-                9
+                9,
+                0,
+                0
             ]
         },
         {
@@ -514,10 +530,10 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#",
-                "7",
+                "FA#7",
                 "",
-                "SIm"
+                "SIm",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -525,8 +541,8 @@ export const mockSongData =   {
                 0,
                 1,
                 0,
-                0,
-                7
+                7,
+                0
             ]
         },
         {
@@ -540,10 +556,10 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "FA#",
-                "7",
+                "FA#7",
                 "",
-                "SIm"
+                "SIm",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -551,8 +567,8 @@ export const mockSongData =   {
                 0,
                 10,
                 0,
-                0,
-                7
+                7,
+                0
             ]
         },
         {
@@ -566,13 +582,17 @@ export const mockSongData =   {
                 "MI",
                 "",
                 "",
-                "LA"
+                "LA",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
                 0,
                 0,
-                23
+                23,
+                0,
+                0
             ]
         },
         {
@@ -592,7 +612,9 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -604,7 +626,9 @@ export const mockSongData =   {
                 11,
                 0,
                 0,
-                5
+                5,
+                0,
+                0
             ]
         },
         {
@@ -621,14 +645,13 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE",
-                "7"
+                "RE7",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -638,7 +661,6 @@ export const mockSongData =   {
                 0,
                 0,
                 8,
-                0,
                 0,
                 9,
                 0,
@@ -675,10 +697,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -703,8 +726,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -735,10 +759,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -763,8 +788,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -783,8 +809,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -815,8 +841,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 5,
@@ -845,7 +871,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -854,7 +881,8 @@ export const mockSongData =   {
                 0,
                 6,
                 0,
-                6
+                6,
+                0
             ]
         },
         {
@@ -871,10 +899,11 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -885,8 +914,9 @@ export const mockSongData =   {
                 0,
                 9,
                 0,
+                9,
                 0,
-                9
+                0
             ]
         },
         {
@@ -905,8 +935,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -937,8 +967,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 3,
@@ -967,7 +997,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 4,
@@ -976,7 +1007,8 @@ export const mockSongData =   {
                 0,
                 7,
                 0,
-                13
+                13,
+                0
             ]
         },
         {
@@ -993,14 +1025,13 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE",
-                "7"
+                "RE7",
+                ""
             ],
             "espacios_entre_acordes": [
                 5,
@@ -1010,7 +1041,6 @@ export const mockSongData =   {
                 0,
                 0,
                 8,
-                0,
                 0,
                 9,
                 0,
@@ -1047,10 +1077,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1075,8 +1106,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -1107,10 +1139,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1135,8 +1168,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -1155,8 +1189,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1187,8 +1221,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 3,
@@ -1217,7 +1251,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 3,
@@ -1226,7 +1261,8 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
-                6
+                6,
+                0
             ]
         },
         {
@@ -1243,10 +1279,11 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -1257,8 +1294,9 @@ export const mockSongData =   {
                 0,
                 6,
                 0,
+                6,
                 0,
-                6
+                0
             ]
         },
         {
@@ -1277,8 +1315,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1309,8 +1347,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 5,
@@ -1339,7 +1377,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 3,
@@ -1348,7 +1387,8 @@ export const mockSongData =   {
                 0,
                 6,
                 0,
-                8
+                8,
+                0
             ]
         },
         {
@@ -1365,14 +1405,13 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
                 "RE",
                 "",
                 "",
-                "RE",
-                "7"
+                "RE7",
+                ""
             ],
             "espacios_entre_acordes": [
                 4,
@@ -1382,7 +1421,6 @@ export const mockSongData =   {
                 0,
                 0,
                 11,
-                0,
                 0,
                 8,
                 0,
@@ -1419,10 +1457,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1447,8 +1486,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -1479,10 +1519,11 @@ export const mockSongData =   {
                 "FA",
                 "",
                 "",
-                "LA",
-                "7",
+                "LA7",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1507,8 +1548,9 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
+                1,
                 0,
-                1
+                0
             ]
         },
         {
@@ -1527,8 +1569,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 3,
@@ -1559,8 +1601,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 4,
@@ -1589,7 +1631,8 @@ export const mockSongData =   {
                 "",
                 "SIm",
                 "",
-                "FA#m"
+                "FA#m",
+                ""
             ],
             "espacios_entre_acordes": [
                 4,
@@ -1598,7 +1641,8 @@ export const mockSongData =   {
                 0,
                 4,
                 0,
-                10
+                10,
+                0
             ]
         },
         {
@@ -1615,7 +1659,9 @@ export const mockSongData =   {
                 "RE",
                 "",
                 "",
-                "LA"
+                "LA",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1624,7 +1670,9 @@ export const mockSongData =   {
                 11,
                 0,
                 0,
-                12
+                12,
+                0,
+                0
             ]
         },
         {
@@ -1641,8 +1689,8 @@ export const mockSongData =   {
                 "SOL",
                 "",
                 "",
-                "LA",
-                "7"
+                "LA7",
+                ""
             ],
             "espacios_entre_acordes": [
                 0,
@@ -1669,7 +1717,9 @@ export const mockSongData =   {
                 "DO",
                 "",
                 "",
-                "RE"
+                "RE",
+                "",
+                ""
             ],
             "espacios_entre_acordes": [
                 2,
@@ -1678,7 +1728,9 @@ export const mockSongData =   {
                 2,
                 0,
                 0,
-                2
+                2,
+                0,
+                0
             ]
         },
         {
