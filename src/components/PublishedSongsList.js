@@ -1,38 +1,41 @@
-// components/PublishedSongsList.js
 import React, { useState, useEffect, useCallback } from 'react';
 import LyricPublishService from '../services/LyricPublishService';
 import SongService from '../services/SongService';
 import CategoryService from '../services/CategoryService';
 import PublishedSongItem from './PublishedSongItem';
-import LoadingIndicator from './LoadingIndicator'; // Make sure to create or import this component
-import ErrorIndicator from './ErrorIndicator'; // Make sure to create or import this component
+import LoadingIndicator from './LoadingIndicator';
+import ErrorIndicator from './ErrorIndicator';
+import SongDisplay from './SongDisplay';
 
 const PublishedSongsList = () => {
   const [publishedSongs, setPublishedSongs] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
+    setIsLoading(true);
+    setError('');
     try {
       const categoryService = new CategoryService();
       const fetchedCategories = await categoryService.getCategories();
       setCategories(fetchedCategories);
+      setIsLoading(false);
     } catch (err) {
       setError('Error fetching categories.');
+      setIsLoading(false);
     }
-  };
+  }, []);
 
   const fetchPublishedSongs = useCallback(async () => {
+    if (categories.length === 0) {
+      await fetchCategories();
+    }
     setIsLoading(true);
     setError('');
     try {
       const lyricPublishService = new LyricPublishService();
       const songService = new SongService();
-      if (categories.length === 0) {
-        await fetchCategories();
-      }
       const publishedSongsData = await lyricPublishService.getLyricsPublish();
       const songsWithDetails = await Promise.all(
         publishedSongsData.map(async (song) => {
@@ -42,62 +45,26 @@ const PublishedSongsList = () => {
             ...song,
             songTitle: songDetails.title,
             categoryName: category ? category.name : 'Categoría desconocida',
-            order: category?.order || 0,
+            order: category?.order || 999, // Use a high order for unknown categories
           };
         })
       );
       songsWithDetails.sort((a, b) => a.order - b.order);
       setPublishedSongs(songsWithDetails);
-      const initialSelectedCategories = songsWithDetails.reduce((acc, currentSong) => ({
-        ...acc,
-        [currentSong._id]: currentSong.category,
-      }), {});
-      setSelectedCategory(initialSelectedCategories);
     } catch (err) {
       setError('Error fetching songs.');
     } finally {
       setIsLoading(false);
     }
-  }, [categories]);
+  }, [categories, fetchCategories]);
 
   useEffect(() => {
-    fetchPublishedSongs();
-  }, [fetchPublishedSongs]);
-
-  const handleCategoryChange = (songId, categoryId) => {
-    setSelectedCategory(prev => ({
-      ...prev,
-      [songId]: categoryId,
-    }));
-  };
-
-  const handleUpdateCategory = async (songId) => {
-    setIsLoading(true);
-    setError('');
-    try {
-      const lyricPublishService = new LyricPublishService();
-      await lyricPublishService.updateLyricPub({ ...selectedCategory, _id: songId });
-      await fetchPublishedSongs(); // Refetch songs to get the updated list
-    } catch (err) {
-      setError('Error updating category.');
-    } finally {
-      setIsLoading(false);
+    if (categories.length === 0) {
+      fetchCategories();
+    } else {
+      fetchPublishedSongs();
     }
-  };
-
-  const handleRemoveSong = async (songId) => {
-    setIsLoading(true);
-    setError('');
-    try {
-      const lyricPublishService = new LyricPublishService();
-      await lyricPublishService.deleteLyricPublish(songId);
-      setPublishedSongs(publishedSongs.filter(song => song._id !== songId));
-    } catch (err) {
-      setError('Error removing song.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [categories.length, fetchCategories, fetchPublishedSongs]);
 
   if (isLoading) return <LoadingIndicator />;
   if (error) return <ErrorIndicator message={error} />;
@@ -112,10 +79,10 @@ const PublishedSongsList = () => {
               key={song._id}
               song={song}
               categories={categories}
-              selectedCategory={selectedCategory[song._id]}
-              onCategoryChange={handleCategoryChange}
-              onUpdateCategory={handleUpdateCategory}
-              onRemoveSong={handleRemoveSong}
+              selectedCategory={song.category}
+              onCategoryChange={() => {}}
+              onUpdateCategory={() => {}}
+              onRemoveSong={() => {}}
             />
           )) : (
             <li className="text-center py-4">No hay canciones publicadas.</li>
