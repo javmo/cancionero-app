@@ -5,10 +5,11 @@ const QRCodePage = () => {
   const [url, setUrl] = useState('');
 
   useEffect(() => {
-    getAppUrl();
+    generateAppUrl();
   }, []);
 
-  const getAppUrl = () => {
+  const generateAppUrl = () => {
+    // Asegúrate de que el subdirectorio sea correcto.
     const baseUrl = window.location.origin;
     const appPath = '/cancionero';
     setUrl(`${baseUrl}${appPath}`);
@@ -20,7 +21,12 @@ const QRCodePage = () => {
       <div className="bg-white p-4 rounded-lg shadow-lg mb-4">
         <QRCode value={url} size={window.innerWidth < 768 ? 192 : 256} />
       </div>
-      <a href={url} target="_blank" rel="noopener noreferrer" className="text-lg sm:text-xl bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-600 transition-colors">
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-lg sm:text-xl bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-600 transition-colors"
+      >
         Ir al Cancionero Publicado
       </a>
     </div>
