@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChordsService from '../services/ChordsService';
 import SongDisplay from './SongDisplay';
+import LoadingIndicator from './LoadingIndicator'; // Asegúrate de que el path sea correcto
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const SongChordSelector = () => {
     const [songs, setSongs] = useState([]);
     const [selectedSong, setSelectedSong] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [viewingDetail, setViewingDetail] = useState(false);
     const navigate = useNavigate();
     const { songId } = useParams();
@@ -20,6 +22,8 @@ const SongChordSelector = () => {
                 setSongs(fetchedSongs);
             } catch (error) {
                 console.error('Failed to fetch songs', error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -41,12 +45,14 @@ const SongChordSelector = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 mt-12 flex justify-center items-center">
+        <div className="container mx-auto px-4 mt-12 flex flex-col items-center">
             <button onClick={() => navigate(-1)} className="absolute top-4 left-4 text-gray-600 text-4xl z-10">
                 <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-            {songs.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+            {isLoading ? (
+                <LoadingIndicator />
+            ) : songs.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 max-w-lg text-center">
                     {songs.map(song => (
                         <button
                             key={song.id}
@@ -54,13 +60,13 @@ const SongChordSelector = () => {
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
                             {song.title} <br />
-                            Interprete: {song.interprete || "No especificado"} <br />
+                            Intérprete: {song.interprete || "No especificado"} <br />
                             Tono: {song.tono}
                         </button>
                     ))}
                 </div>
             ) : (
-                <div className="p-6 bg-gray-200 rounded-lg shadow-lg text-center">
+                <div className="flex flex-col items-center justify-center bg-gray-200 rounded-lg shadow-lg text-center p-6 mt-12">
                     <p className="text-2xl mb-4">¡Ups! No se encontraron canciones con acordes.</p>
                     <p className="text-4xl">😢</p>
                 </div>

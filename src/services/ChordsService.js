@@ -39,6 +39,12 @@ class ChordsService {
             throw error; // Propagar el error para que el componente que utiliza este servicio lo maneje
         }
     }
+
+     // Actualizar esta función para codificar correctamente el nombre del acorde
+     getChordImage(chordName) {
+        const encodedChordName = encodeURIComponent(chordName);
+        return `${this.URI}/image/${encodedChordName}`;
+    }
 }
 
 export default ChordsService;

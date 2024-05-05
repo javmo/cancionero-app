@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faArrowLeft, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 import { transposeChord, notes } from '../utils/chordUtils'; // Asegúrate de que el path sea correcto
+import ModalChord from './ModalChord'; // Asegúrate de que el path sea correcto
 
 const SPACE_UNIT = 8.84; // Ancho del espacio unitario en píxeles
 
@@ -9,6 +10,9 @@ const SongDisplay = ({ song, onBack }) => {
     const [isScrolling, setIsScrolling] = useState(false);
     const [scrollSpeed, setScrollSpeed] = useState(50); // Velocidad de auto-scroll
     const [keyShift, setKeyShift] = useState(0); // Desplazamiento de tono inicial
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalImage, setModalImage] = useState(null);
+    const [modalChordName, setModalChordName] = useState('');
     const scrollRef = useRef(null); // Referencia para el intervalo de auto-scroll
 
     // Efecto para manejar el auto-scroll
@@ -21,10 +25,17 @@ const SongDisplay = ({ song, onBack }) => {
         } else {
             clearInterval(scrollInterval);
         }
-    
+
         return () => clearInterval(scrollRef.current); // Limpieza al desmontar
     }, [isScrolling, scrollSpeed]);
-    
+
+    // Función para abrir el modal con la imagen del acorde
+    const openChordModal = (chordName) => {
+        const imageUrl = `${process.env.REACT_APP_API_URL}/chords/image/${encodeURIComponent(chordName)}`;
+        setModalImage(imageUrl);
+        setModalChordName(chordName);
+        setIsModalOpen(true);
+    };
 
     // Función para renderizar las líneas de acordes con espacios adecuados
     const renderChordsLine = (acordes, espacios) => {
@@ -44,7 +55,13 @@ const SongDisplay = ({ song, onBack }) => {
                     currentSpaceWidth = 0;
                 }
                 renderedLine.push(
-                    <sup key={`chord-${index}`} className="font-bold text-blue-500">{transposedChord}</sup>
+                    <sup
+                        key={`chord-${index}`}
+                        className="font-bold text-blue-500 cursor-pointer hover:underline"
+                        onClick={() => openChordModal(transposedChord)}
+                    >
+                        {transposedChord}
+                    </sup>
                 );
             }
         });
@@ -88,6 +105,7 @@ const SongDisplay = ({ song, onBack }) => {
                     </div>
                 </div>
             ))}
+            <ModalChord isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={`Acorde: ${modalChordName}`} imageUrl={modalImage} />
         </div>
     );
 };

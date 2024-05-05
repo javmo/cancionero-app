@@ -5,7 +5,6 @@ import CategoryService from '../services/CategoryService';
 import PublishedSongItem from './PublishedSongItem';
 import LoadingIndicator from './LoadingIndicator';
 import ErrorIndicator from './ErrorIndicator';
-import SongDisplay from './SongDisplay';
 
 const PublishedSongsList = () => {
   const [publishedSongs, setPublishedSongs] = useState([]);
@@ -44,8 +43,8 @@ const PublishedSongsList = () => {
           return {
             ...song,
             songTitle: songDetails.title,
-            categoryName: category ? category.name : 'Categoría desconocida',
-            order: category?.order || 999, // Use a high order for unknown categories
+            categoryName: category ? category.categoryType : 'Categoría desconocida',
+            order: category?.order || 999,
           };
         })
       );
@@ -57,6 +56,33 @@ const PublishedSongsList = () => {
       setIsLoading(false);
     }
   }, [categories, fetchCategories]);
+
+  const handleCategoryChange = (songId, categoryId) => {
+    setPublishedSongs(publishedSongs.map(song => (
+      song._id === songId ? { ...song, category: categoryId } : song
+    )));
+  };
+
+  const handleUpdateCategory = async (songId) => {
+    const lyricPublishService = new LyricPublishService();
+    try {
+      const songToUpdate = publishedSongs.find(song => song._id === songId);
+      await lyricPublishService.updateLyricPub(songToUpdate);
+      fetchPublishedSongs(); // Refresca la lista de canciones después de actualizar
+    } catch (err) {
+      setError('Error updating category.');
+    }
+  };
+
+  const handleRemoveSong = async (songId) => {
+    const lyricPublishService = new LyricPublishService();
+    try {
+      await lyricPublishService.deleteLyricPublish(songId);
+      setPublishedSongs(publishedSongs.filter(song => song._id !== songId));
+    } catch (err) {
+      setError('Error removing song.');
+    }
+  };
 
   useEffect(() => {
     if (categories.length === 0) {
@@ -74,17 +100,19 @@ const PublishedSongsList = () => {
       <h2 className="text-2xl font-bold mb-4 text-center p-4 border-b">Canciones Publicadas</h2>
       <div className="max-h-96 overflow-y-auto">
         <ul className="divide-y divide-gray-200">
-          {publishedSongs.length > 0 ? publishedSongs.map((song) => (
-            <PublishedSongItem
-              key={song._id}
-              song={song}
-              categories={categories}
-              selectedCategory={song.category}
-              onCategoryChange={() => {}}
-              onUpdateCategory={() => {}}
-              onRemoveSong={() => {}}
-            />
-          )) : (
+          {publishedSongs.length > 0 ? (
+            publishedSongs.map((song) => (
+              <PublishedSongItem
+                key={song._id}
+                song={song}
+                categories={categories}
+                selectedCategory={song.category}
+                onCategoryChange={handleCategoryChange}
+                onUpdateCategory={handleUpdateCategory}
+                onRemoveSong={handleRemoveSong}
+              />
+            ))
+          ) : (
             <li className="text-center py-4">No hay canciones publicadas.</li>
           )}
         </ul>
