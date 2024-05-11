@@ -18,46 +18,43 @@ const PublishedSongItem = ({
   };
 
   return (
-    <li className="py-4 px-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors duration-150 rounded-lg my-2 shadow-sm">
-      <div className="flex flex-col">
-        <p className="text-lg font-semibold text-blue-700">{song.songTitle}</p>
+    <li className="flex items-center justify-between p-4 bg-dark-700 shadow-lg rounded-lg my-2 space-x-4">
+      <div className="flex-grow">
+        <p className="text-lg font-semibold text-blue-400">{song.songTitle}</p>
         <div className="flex items-center mt-1">
-          <label className="text-sm font-medium text-gray-700 mr-2">Categoría:</label>
+          <label className="text-sm font-medium text-gray-300 mr-2">Categoría:</label>
           <select
             value={selectedCategory || song.category || ''}
             onChange={(e) => onCategoryChange(song._id, e.target.value)}
-            className="text-sm p-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="text-sm p-2 rounded-md border border-gray-600 bg-dark-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
           >
-            <option value="">Selecciona una categoría</option>
             {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.categoryType}
-              </option>
+              <option key={category._id} value={category._id}>{category.categoryType}</option>
             ))}
           </select>
         </div>
       </div>
       <div className="flex items-center">
         <button
+          className={`text-blue-400 hover:text-blue-500 p-2 rounded-full ${window.innerWidth < 640 ? 'button-small icon-small' : ''}`}
           onClick={() => handleNavigateToSongChordSelector(song.song)}
-          className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors duration-150 mr-2"
-          aria-label="Ver detalles"
+          aria-label="View details"
         >
           <FontAwesomeIcon icon={faEye} />
         </button>
         <button
           onClick={() => onUpdateCategory(song._id)}
-          className="px-3 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors duration-150 mr-2"
-          aria-label="Actualizar"
+          className="text-green-400 hover:text-green-500 p-2 rounded-full"
+          aria-label="Update category"
         >
-          <FontAwesomeIcon icon={faEdit} />
+          <FontAwesomeIcon icon={faEdit} size="lg" />
         </button>
         <button
           onClick={() => onRemoveSong(song._id)}
-          className="p-2 bg-red-500 hover:bg-red-600 text-white rounded transition-colors duration-150"
-          aria-label="Eliminar"
+          className="text-red-500 hover:text-red-600 p-2 rounded-full"
+          aria-label="Delete"
         >
-          <FontAwesomeIcon icon={faTrash} />
+          <FontAwesomeIcon icon={faTrash} size="lg" />
         </button>
       </div>
     </li>

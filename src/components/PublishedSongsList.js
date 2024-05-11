@@ -68,7 +68,7 @@ const PublishedSongsList = () => {
     try {
       const songToUpdate = publishedSongs.find(song => song._id === songId);
       await lyricPublishService.updateLyricPub(songToUpdate);
-      fetchPublishedSongs(); // Refresca la lista de canciones después de actualizar
+      fetchPublishedSongs();
     } catch (err) {
       setError('Error updating category.');
     }
@@ -96,27 +96,25 @@ const PublishedSongsList = () => {
   if (error) return <ErrorIndicator message={error} />;
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 bg-white rounded-lg shadow overflow-hidden">
-      <h2 className="text-2xl font-bold mb-4 text-center p-4 border-b">Canciones Publicadas</h2>
-      <div className="max-h-96 overflow-y-auto">
-        <ul className="divide-y divide-gray-200">
-          {publishedSongs.length > 0 ? (
-            publishedSongs.map((song) => (
-              <PublishedSongItem
-                key={song._id}
-                song={song}
-                categories={categories}
-                selectedCategory={song.category}
-                onCategoryChange={handleCategoryChange}
-                onUpdateCategory={handleUpdateCategory}
-                onRemoveSong={handleRemoveSong}
-              />
-            ))
-          ) : (
-            <li className="text-center py-4">No hay canciones publicadas.</li>
-          )}
-        </ul>
-      </div>
+    <div className="flex flex-col items-center min-h-screen bg-dark-900 p-4 text-white">
+      <h2 className="text-2xl font-bold  text-center w-full sticky top-0 bg-dark-800 py-2 shadow-lg z-10">Canciones Publicadas</h2>
+      <ul className="divide-y divide-gray-600 w-full">
+        {publishedSongs.length > 0 ? (
+          publishedSongs.map((song) => (
+            <PublishedSongItem
+              key={song._id}
+              song={song}
+              categories={categories}
+              selectedCategory={song.category}
+              onCategoryChange={handleCategoryChange}
+              onUpdateCategory={handleUpdateCategory}
+              onRemoveSong={handleRemoveSong}
+            />
+          ))
+        ) : (
+          <li className="text-center py-4 text-gray-300">No hay canciones publicadas.</li>
+        )}
+      </ul>
     </div>
   );
 };

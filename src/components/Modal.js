@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate desde React Router
+import { useNavigate } from 'react-router-dom';
 import LyricService from '../services/LyricService';
 import LyricPublishService from '../services/LyricPublishService';
 import CategoryService from '../services/CategoryService';
 import LyricsPublish from '../models/LyricsPublish';
-import SongChordSelector from './SongChordSelector';
 
 const Modal = ({ isOpen, onClose, song }) => {
     const [lyrics, setLyrics] = useState([]);
@@ -12,12 +11,11 @@ const Modal = ({ isOpen, onClose, song }) => {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [isFullLyricVisible, setIsFullLyricVisible] = useState(false);
-    const navigate = useNavigate(); // Obtenemos la función navigate desde React Router
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLyricsAndCategories = async () => {
             if (song) {
-                const publishService = new LyricPublishService();
                 const lyricService = new LyricService();
                 const songLyrics = await lyricService.getLyric(song.lyric);
                 const lyricsArray = Array.isArray(songLyrics.text) ? songLyrics.text : [songLyrics.text];
@@ -48,51 +46,49 @@ const Modal = ({ isOpen, onClose, song }) => {
     };
 
     const handleNavigateToSongChordSelector = () => {
-        navigate(`/songChordSelector/${song._id}`); // Reemplaza '/ruta-a-tu-song-chord-selector' con la ruta real de tu componente SongChordSelector
+        navigate(`/songChordSelector/${song._id}`);
     };
 
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full z-50">
-            <div className="relative top-20 mx-auto p-4 sm:p-6 border w-11/12 max-w-md sm:max-w-lg shadow-lg rounded-md bg-white">
-                <div className="mb-4 overflow-y-auto max-h-96">
-                    <h2 className="text-base sm:text-lg font-semibold mb-2 text-gray-800">{song.title}</h2>
-                    <p className="text-sm text-gray-700 mb-4">
-                        {isFullLyricVisible ? lyrics.join('\n') : preview}
-                    </p>
-                    <button
-                        onClick={toggleFullLyrics}
-                        className="text-blue-500 hover:text-blue-700 text-sm"
-                    >
-                        {isFullLyricVisible ? 'Ver menos' : 'Ver más'}
-                    </button>
-                    <select
-                        value={selectedCategory}
-                        onChange={e => setSelectedCategory(e.target.value)}
-                        className="w-full p-2 mb-4 text-sm bg-gray-100 rounded-lg focus:bg-white border-gray-300"
-                    >
-                        {categories.map((category) => (
-                            <option key={category._id} value={category._id}>{category.categoryType}</option>
-                        ))}
-                    </select>
-                </div>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+            <div className="card w-full max-w-lg p-6 bg-gray-900 text-white">
+                <h2 className="text-xl font-bold mb-4">{song.title}</h2>
+                <p className="text-sm mb-4">
+                    {isFullLyricVisible ? lyrics.join('\n') : preview}
+                </p>
+                <button
+                    onClick={toggleFullLyrics}
+                    className="text-blue-500 hover:text-blue-700 text-sm mb-4"
+                >
+                    {isFullLyricVisible ? 'Ver menos' : 'Ver más'}
+                </button>
+                <select
+                    value={selectedCategory}
+                    onChange={e => setSelectedCategory(e.target.value)}
+                    className="w-full p-2 mb-4 text-sm bg-gray-100 rounded-lg focus:bg-white border-gray-300 text-black"
+                >
+                    {categories.map((category) => (
+                        <option key={category._id} value={category._id}>{category.categoryType}</option>
+                    ))}
+                </select>
                 <div className="flex justify-around items-center">
                     <button
                         onClick={onClose}
-                        className="py-3 px-5 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
+                        className="btn-danger"
                     >
                         Cerrar
                     </button>
-                    <button 
-                        onClick={handleNavigateToSongChordSelector} // Aquí manejamos la navegación al hacer clic en el botón
-                        className="py-3 px-5 bg-green-500 text-white text-sm rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                    <button
+                        onClick={handleNavigateToSongChordSelector}
+                        className="btn-primary"
                     >
-                    Acrodes
+                        Acordes
                     </button>
                     <button
                         onClick={handlePublish}
-                        className="py-3 px-5 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                        className="btn-post"
                     >
                         Publicar
                     </button>
@@ -103,5 +99,3 @@ const Modal = ({ isOpen, onClose, song }) => {
 };
 
 export default Modal;
-
-

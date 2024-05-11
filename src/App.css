@@ -3,22 +3,76 @@
 @tailwind utilities;
 
 @layer components {
-    .slick-dots-custom li button:before {
-      @apply text-sm !important; /* Esto hará que los puntos sean más grandes */
-      color: #64a9f8 !important; /* Establece el color de los puntos no activos */
-      opacity: 1 !important; /* Hace que los puntos sean completamente opacos */
-    }
-    
-    .slick-dots-custom li.slick-active button:before {
-      color: #053fb1 !important; /* Establece el color de los puntos activos */
-      opacity: 1 !important; /* Opacidad de los puntos activos */
-    }
-  
-    .slick-slide-custom {
-      @apply border border-blue-200 rounded-lg shadow-md !important; /* Esto agrega un borde y sombra */
-    }
-
-    .slick-slide-custom {
-        @apply border border-blue-200 rounded-lg shadow-md !important; /* Esto agrega un borde y sombra */
-      }
+  .btn-primary {
+    @apply bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition-all duration-200;
   }
+
+  .btn-secondary {
+    @apply bg-gray-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-all duration-200;
+  }
+
+  .btn-post {
+    @apply bg-green-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-600 transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 transition-all duration-200;
+  }
+
+  .btn-success {
+    @apply bg-green-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-600 transition-all duration-200;
+  }
+
+  .input-primary {
+    @apply w-full px-4 py-3 text-lg border border-gray-600 rounded-lg bg-dark-800 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 shadow-md;
+  }
+
+  .card {
+    @apply p-4 bg-dark-800 shadow-lg rounded-lg cursor-pointer hover:bg-dark-700 transition-all duration-200;
+  }
+
+  .btn-chords {
+    @apply bg-green-700 text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-all duration-200;
+  }
+
+  .slick-dots-custom li button:before {
+    @apply text-sm !important;
+    color: #64a9f8 !important;
+    opacity: 1 !important;
+  }
+
+  .slick-dots-custom li.slick-active button:before {
+    color: #053fb1 !important;
+    opacity: 1 !important;
+  }
+
+  .slick-slide-custom {
+    @apply border border-blue-200 rounded-lg shadow-md !important;
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #3498db;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .button-small {
+    padding: 8px;  
+  }
+  .icon-small {
+    font-size: 16px;  
+  }
+}
+
