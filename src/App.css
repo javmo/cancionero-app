@@ -75,4 +75,21 @@
     font-size: 16px;  
   }
 }
+.share-qr-button {
+  background-color: #1a73e8;  /* Blue shade that matches the theme */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
 
+.share-qr-button:hover {
+  background-color: #2a85f8;
+}
+
+.share-qr-button:active {
+  background-color: #1565c0;
+}
