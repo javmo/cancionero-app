@@ -8,14 +8,17 @@ import LyricService from '../services/LyricService';
 import Cancion from './Cancion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQrcode } from '@fortawesome/free-solid-svg-icons';
+import LoadingIndicator from './LoadingIndicator'; // Make sure the import path is correct
 
 const Cancionero = () => {
   const [categorias, setCategorias] = useState([]);
   const [cancionesConLetra, setCancionesConLetra] = useState([]);
-  const [showQR, setShowQR] = useState(false); // State to control QR modal visibility
+  const [isLoading, setIsLoading] = useState(false);
+  const [showQR, setShowQR] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const categoryService = new CategoryService();
       const lyricPublishService = new LyricPublishService();
       const songService = new SongService();
@@ -37,18 +40,18 @@ const Cancionero = () => {
       }));
 
       setCancionesConLetra(cancionesConDetalle);
+      setIsLoading(false);
     };
 
     fetchData();
   }, []);
 
-  const handleShowQR = () => {
-    setShowQR(true);
-  };
+  const handleShowQR = () => setShowQR(true);
+  const handleCloseQR = () => setShowQR(false);
 
-  const handleCloseQR = () => {
-    setShowQR(false);
-  };
+  if (isLoading) {
+    return <LoadingIndicator />; // Now using the custom loading indicator
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
@@ -86,3 +89,4 @@ const Cancionero = () => {
 };
 
 export default Cancionero;
+
