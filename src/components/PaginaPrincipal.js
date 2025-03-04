@@ -1,12 +1,12 @@
 import React from 'react';
-import LecturaDelDia from './LecturaDelDia'; // Asegúrate de que la ruta de importación sea correcta
-import CancionesRecomendadas from './CancionesRecomendadas'; // Componente hipotético para canciones recomendadas
+import LecturaDelDia from './LecturaDelDia';
+import CancionesRecomendadas from './CancionesRecomendadas';
 
-const PaginaPrincipal = () => {
+const PaginaPrincipal = ({ idioma }) => {
   return (
     <div>
-      <LecturaDelDia />
-      <CancionesRecomendadas />
+      <LecturaDelDia idioma={idioma} />
+      <CancionesRecomendadas idioma={idioma} />
     </div>
   );
 };

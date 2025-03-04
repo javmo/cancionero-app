@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import OpeniaService from '../services/OpeniaService';
-import Modal from './Modal';
 import SongService from '../services/SongService';
+import Modal from './Modal';
 
-const CancionesRecomendadas = () => {
+const CancionesRecomendadas = ({ idioma }) => {
   const [lecturas, setLecturas] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,19 +19,18 @@ const CancionesRecomendadas = () => {
         const songService = new SongService();
         const response = await openiaService.getRecomendations();
 
-        // Aquí modificamos para obtener la información de las canciones
         const lecturasConCanciones = await Promise.all(response.lecturas.map(async (lectura) => {
           const detallesConCanciones = await Promise.all(lectura.detalles.map(async (detalle) => {
-            const cancion = await songService.getSongByLyricId(detalle.id_cancion);
-            return { ...detalle, cancion }; // Añadimos el objeto de la canción completo
+            try {
+              const cancion = await songService.getSongByLyricId(detalle.id_cancion);
+              return { ...detalle, cancion };
+            } catch (error) {
+              return { ...detalle, cancion: null };
+            }
           }));
+
           return { ...lectura, detalles: detallesConCanciones };
         }));
-
-        // Ordenamos las canciones dentro de cada lectura según el criterio especificado
-        lecturasConCanciones.forEach(lectura => {
-          lectura.detalles = ordenarCanciones(lectura.detalles);
-        });
 
         setLecturas(lecturasConCanciones);
       } catch (error) {
@@ -45,57 +42,51 @@ const CancionesRecomendadas = () => {
     fetchData();
   }, [orden]);
 
-  // Esta función ahora espera recibir un arreglo de detalles con canciones para ordenar
-  const ordenarCanciones = (detallesConCanciones) => {
-    switch (orden) {
-      case 'mayorCoincidencia':
-        return detallesConCanciones.sort((a, b) => b.similitud - a.similitud);
-      case 'menorCoincidencia':
-        return detallesConCanciones.sort((a, b) => a.similitud - b.similitud);
-      default:
-        return detallesConCanciones;
-    }
-  };
-
   const handleSongSelect = (detalle) => {
-    setSelectedSong(detalle.cancion); // Suponemos que detalle.cancion contiene la información de la canción
+    setSelectedSong(detalle.cancion);
     setIsModalOpen(true);
   };
 
-  const mainSettings = {
+  const sliderSettings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
   };
-
-  
-  const slideContainerStyle = "p-4 bg-white shadow-lg rounded-lg";
 
   return (
     <div className="p-4">
-      <h2 className="text-xl md:text-2xl font-semibold mb-4 text-blue-600">Canciones Recomendadas</h2>
+      <h2 className="text-xl md:text-2xl font-semibold mb-4 text-blue-600">
+        {idioma === 'la' ? 'Carmina commendata' : 'Canciones Recomendadas'}
+      </h2>
 
       {isLoading ? (
         <div className="flex justify-center items-center min-h-[200px]">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500"></div>
         </div>
+      ) : lecturas.length === 0 ? (
+        <p className="text-gray-600 text-center">No hay recomendaciones disponibles.</p>
       ) : (
-        <Slider {...mainSettings} className="slick-dots-custom">
+        <Slider {...sliderSettings}>
           {lecturas.map((lectura, indexLectura) => (
-            <div key={indexLectura} className={slideContainerStyle}>
+            <div key={indexLectura} className="p-4 bg-white shadow-lg rounded-lg">
               <h3 className="text-lg font-semibold mb-2">{lectura.tipo_lectura}</h3>
+
               {lectura.detalles.length > 0 ? (
-                <div className="space-y-2 overflow-y-auto max-h-40">
+                <div className="space-y-2 overflow-y-auto max-h-40 bg-gray-100 p-2 rounded-md shadow-inner">
                   {lectura.detalles.map((detalle, indexDetalle) => (
-                    <div key={indexDetalle} onClick={() => handleSongSelect(detalle)} className="flex justify-between items-center p-2 bg-white shadow rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
-                      <div className="flex-grow">
-                        <p className="text-sm md:text-md font-medium text-gray-800">{detalle.cancion.title}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-xs text-gray-600">Afinidad:</p>
-                        <p className="text-xs md:text-sm font-semibold text-green-500">{Math.round(detalle.similitud * 100)}%</p>
+                    <div key={indexDetalle} 
+                         onClick={() => handleSongSelect(detalle)}
+                         className="flex justify-between items-center p-2 bg-white shadow rounded-lg cursor-pointer hover:bg-blue-50 transition-colors border border-gray-200">
+                      <p className="text-sm md:text-md font-medium text-gray-800 w-2/3 truncate">
+                        {detalle.cancion ? detalle.cancion.title : "Canción no encontrada"}
+                      </p>
+                      <div className="w-1/3 text-right">
+                        <span className="text-xs text-gray-600 mr-1">Afinidad:</span>
+                        <span className="text-xs md:text-sm font-semibold text-green-500">
+                          {Math.round(detalle.similitud * 100)}%
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -111,7 +102,7 @@ const CancionesRecomendadas = () => {
         </Slider>
       )}
 
-      {isModalOpen && (
+      {isModalOpen && selectedSong && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} song={selectedSong} />
       )}
     </div>

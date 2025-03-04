@@ -38,6 +38,33 @@ class ScrapingService {
         return await response.json();
     }
 
+    async getLecturaVa(fecha) {
+        console.log(`Obteniendo lectura para la fecha: ${fecha}`);
+        const response = await fetch(`${this.URI}/lectura-va?fecha=${fecha}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'GET'
+        });
+        return await response.json();
+    }
+
+    async getSantos(fecha) {
+        console.log(`Obteniendo santos para la fecha: ${fecha}`);
+        const response = await fetch(`${this.URI}/santos?fecha=${fecha}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'GET'
+        });
+        return await response.json();
+    }
+
+    async getFiestas(fecha) {
+        console.log(`Obteniendo fiestas del mes`);
+        const response = await fetch(`${this.URI}/fiestas?fecha=${fecha}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'GET'
+        });
+        return await response.json();
+    }
+
 }
 
 export default ScrapingService;

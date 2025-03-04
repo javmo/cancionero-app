@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faMusic, faQrcode } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faMusic, faQrcode, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = () => {
+const Navbar = ({ idioma, setIdioma }) => {
   const location = useLocation();
 
   const getLinkClasses = (path) => {
@@ -17,26 +17,39 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-blue-500 p-3 shadow-lg fixed inset-x-0 bottom-0 md:relative md:inset-x-0 md:top-0 z-10" role="navigation">
-      <ul className="flex justify-evenly md:justify-start items-center">
+    <nav className="bg-blue-500 p-3 shadow-lg fixed inset-x-0 bottom-0 md:relative md:inset-x-0 md:top-0 z-10 flex justify-between items-center">
+      {/* Menú de navegación */}
+      <ul className="flex space-x-4 items-center">
         {[
-          { to: "/", icon: faHome, label: "Inicio" },
-          { to: "/search", icon: faSearch, label: "Buscar" },
-          { to: "/publishedSongsList", icon: faMusic, label: "Publicadas" },
+          { to: "/", icon: faHome, label: idioma === 'la' ? "Domus" : "Inicio" },
+          { to: "/search", icon: faSearch, label: idioma === 'la' ? "Quaerere" : "Buscar" },
+          { to: "/publishedSongsList", icon: faMusic, label: idioma === 'la' ? "Publicata" : "Publicadas" },
           { to: "/qrLink", icon: faQrcode, label: "QR/Link" }
         ].map(link => (
           <li key={link.to}>
             <Link to={link.to} className={getLinkClasses(link.to)} title={link.label}
                   aria-current={location.pathname === link.to ? 'page' : undefined}>
               <FontAwesomeIcon icon={link.icon} className="text-lg" />
-              <span className="hidden md:inline">{link.label}</span>
+              <span className="hidden md:inline ml-2">{link.label}</span>
             </Link>
           </li>
         ))}
       </ul>
+
+      {/* Selector de idioma */}
+      <div className="flex items-center space-x-2">
+        <FontAwesomeIcon icon={faGlobe} className="text-white text-lg" />
+        <select 
+          value={idioma} 
+          onChange={(e) => setIdioma(e.target.value)}
+          className="border rounded px-2 py-1 bg-white text-black"
+        >
+          <option value="es">Español</option>
+          <option value="la">Latín</option>
+        </select>
+      </div>
     </nav>
   );
 };
 
 export default Navbar;
-
