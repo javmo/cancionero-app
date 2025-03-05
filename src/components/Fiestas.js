@@ -13,9 +13,15 @@ const Fiestas = ({ fiestas, fecha, idioma }) => {
     setSelectedFiesta(null);
   };
 
-  // Función para traducir el mes según el idioma
+  // 📆 Obtener el mes en el idioma correcto
+  const obtenerMes = (fecha, lang) => {
+    const opciones = { month: "long" };
+    return new Date(fecha).toLocaleDateString(lang === "la" ? "la" : "es-ES", opciones);
+  };
+
+  // 📆 Formatear fecha correctamente (solo Día y Mes)
   const formatFecha = (date, lang) => {
-    return new Date(date).toLocaleDateString(lang === "la" ? "la" : "es-ES", {
+    return new Date(date + "T00:00:00").toLocaleDateString(lang === "la" ? "la" : "es-ES", {
       day: "2-digit",
       month: "long",
     });
@@ -24,7 +30,7 @@ const Fiestas = ({ fiestas, fecha, idioma }) => {
   return (
     <div className="bg-white p-4 md:p-6 rounded shadow-md w-full max-w-4xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-semibold border-b pb-2 mb-4 text-gray-800 text-center">
-        🎉 {idioma === "la" ? "Festivitates Mensis" : `Fiestas de ${formatFecha(fecha, idioma)}`}
+        🎉 {idioma === "la" ? `Festivitates Mensis ${obtenerMes(fecha, idioma)}` : `Fiestas del mes de ${obtenerMes(fecha, idioma)}`}
       </h2>
 
       {/* Contenedor con scroll horizontal */}

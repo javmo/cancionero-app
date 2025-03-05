@@ -8,6 +8,12 @@ class CancionService {
         return await response.json();
     }
 
+    async getCancionById(id) {
+        const response = await fetch(`${this.URI}/${id}`);
+        if (!response.ok) throw new Error("Error al obtener la canción");
+        return await response.json();
+    }
+
     async postCancion(cancion) {
         const response = await fetch(this.URI, {
             headers: {

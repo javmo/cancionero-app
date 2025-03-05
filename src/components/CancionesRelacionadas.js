@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import CancionService from "../services/CancionService";
-import { FaMusic, FaPlusCircle, FaSpinner, FaInfoCircle } from "react-icons/fa";
+import { 
+  FaMusic, FaPlusCircle, FaSpinner, FaInfoCircle, 
+  FaCopy, FaWhatsapp, FaCheck 
+} from "react-icons/fa"; 
 
 const cancionService = new CancionService();
 
-const CancionesRelacionadas = ({ fecha }) => {
+const CancionesRelacionadas = ({ fecha, lecturas }) => {
   const [canciones, setCanciones] = useState([]);
   const [nombre, setNombre] = useState("");
   const [titulo, setTitulo] = useState("");
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [copied, setCopied] = useState({}); // Estado individual para cada canción
 
   useEffect(() => {
     fetchCanciones();
@@ -52,39 +56,83 @@ const CancionesRelacionadas = ({ fecha }) => {
     }
   };
 
-  return (
-    <div className="bg-white p-4 md:p-6 rounded shadow-md mb-6 w-full max-w-3xl mx-auto">
+  // Obtener el reproductor embebido según el enlace
+  const getEmbedPlayer = (url) => {
+    if (url.includes("youtube.com") || url.includes("youtu.be")) {
+      const videoId = url.split("v=")[1]?.split("&")[0] || url.split("youtu.be/")[1];
+      return (
+        <iframe
+          className="w-full h-48 rounded-lg shadow-md"
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title="Reproductor de YouTube"
+          allowFullScreen
+        ></iframe>
+      );
+    } else if (url.includes("spotify.com")) {
+      return (
+        <iframe
+          className="w-full h-20 rounded-lg shadow-md"
+          src={`https://open.spotify.com/embed/track/${url.split("/track/")[1]?.split("?")[0]}`}
+          allow="encrypted-media"
+        ></iframe>
+      );
+    }
+    return (
+      <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-500 font-semibold hover:underline">
+        ▶️ Escuchar Canción
+      </a>
+    );
+  };
 
-      {/* 📌 Sección 1: Lista de Canciones */}
+  // Compartir en WhatsApp
+  const shareOnWhatsApp = (cancion) => {
+    if (!lecturas || !lecturas["Evangelio"]) return;
+
+    const cancionUrl = `${window.location.origin}/cancionrelacionada/${cancion._id}`;
+    const mensaje = `✨ *Evangelio del Día* ✨\n📅 *Fecha:* ${fecha}\n\n📖 *Evangelio:*\n${lecturas["Evangelio"].substring(0, 300)}...\n\n🎶 *Canción recomendada:*\n📌 *${cancion.titulo}* (por ${cancion.nombre})\n🔗 ${cancionUrl}\n\n📝 Reflexionemos y compartamos juntos! 🙌`;
+
+    const encodedMessage = encodeURIComponent(mensaje);
+    window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
+  };
+
+
+
+  return (
+    <div className="bg-white p-1 rounded shadow-md mb-6 w-full max-w-3xl mx-auto">
+      {/* 📌 Lista de Canciones */}
       {canciones.length > 0 ? (
-        <div className="space-y-3 md:space-y-4 mb-6">
-          {canciones.map((cancion, index) => (
-            <div key={index} className="border border-gray-200 rounded p-3 md:p-4 shadow bg-gray-50">
-              <p className="text-base md:text-lg font-semibold flex items-center gap-2 text-gray-900">
+        <div className="space-y-4 mb-6">
+          {canciones.map((cancion) => (
+            <div key={cancion._id} className="border border-gray-300 rounded-lg p-4 shadow-md bg-white">
+              <p className="text-lg font-semibold flex items-center gap-2 text-gray-900">
                 <FaMusic /> {cancion.titulo}
               </p>
-              <p className="text-gray-700 text-sm md:text-base">
+              <p className="text-gray-600 text-sm">
                 🎤 Recomendada por: <strong>{cancion.nombre}</strong>
               </p>
-              <a
-                href={cancion.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 font-semibold hover:underline text-sm md:text-base"
-              >
-                ▶️ Escuchar en Spotify / YouTube
-              </a>
+              {/* Reproductor embebido */}
+              <div className="mt-3">{getEmbedPlayer(cancion.link)}</div>
+              
+              {/* Botones de acción */}
+              <div className="flex justify-between mt-3">
+                <button
+                  onClick={() => shareOnWhatsApp(cancion)}
+                  className="flex items-center gap-1 text-green-700 font-semibold hover:text-green-900 transition duration-200"
+                >
+                  <FaWhatsapp /> Compartir en WhatsApp
+                </button>
+              </div>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-gray-500 text-center text-sm md:text-base mb-6">
+        <p className="text-gray-500 text-center text-sm mb-6">
           Aún no hay canciones sugeridas. ¡Sé el primero en compartir una! 🎶
         </p>
       )}
 
-      {/* 📌 Sección 2: Formulario para agregar canción */}
-      <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-900 p-3 md:p-4 mb-4 rounded">
+       {/* 📌 Sección 2: Formulario para agregar canción */}
+       <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-900 p-3 md:p-4 mb-4 rounded">
         <p className="flex items-center gap-2 font-semibold text-base md:text-lg">
           <FaInfoCircle /> ¿Tenés una canción que te llena el alma?
         </p>
@@ -95,42 +143,12 @@ const CancionesRelacionadas = ({ fecha }) => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mb-4 bg-gray-50 p-3 md:p-4 rounded shadow">
-        <input
-          type="text"
-          className="border border-gray-300 rounded p-2 w-full mb-2 text-sm md:text-base bg-white focus:ring focus:ring-green-300"
-          placeholder="Tu nombre (opcional)"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />
-        <input
-          type="text"
-          className="border border-gray-300 rounded p-2 w-full mb-2 text-sm md:text-base bg-white focus:ring focus:ring-green-300"
-          placeholder="Título de la canción"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-        />
-        <input
-          type="text"
-          className="border border-gray-300 rounded p-2 w-full mb-2 text-sm md:text-base bg-white focus:ring focus:ring-green-300"
-          placeholder="Enlace de Spotify/YouTube"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="w-full flex justify-center items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow transition duration-300 text-sm md:text-base"
-          disabled={loading}
-        >
-          {loading ? <FaSpinner className="animate-spin" /> : "Sugerir Canción"} <FaPlusCircle />
-        </button>
+      <form onSubmit={handleSubmit} className="bg-gray-50 p-4 rounded-md shadow">
+        <input type="text" placeholder="Tu nombre (opcional)" value={nombre} onChange={(e) => setNombre(e.target.value)} className="border p-2 rounded w-full mb-2"/>
+        <input type="text" placeholder="Título de la canción" value={titulo} onChange={(e) => setTitulo(e.target.value)} className="border p-2 rounded w-full mb-2"/>
+        <input type="text" placeholder="Enlace de Spotify/YouTube" value={link} onChange={(e) => setLink(e.target.value)} className="border p-2 rounded w-full mb-2"/>
+        <button type="submit" className="bg-green-500 text-white p-3 rounded w-full text-lg font-semibold">{loading ? <FaSpinner className="animate-spin" /> : "Sugerir Canción"}</button>
       </form>
-
-      {message && (
-        <div className={`p-3 mb-4 text-white rounded text-sm md:text-base ${message.type === "success" ? "bg-green-500" : "bg-red-500"}`}>
-          {message.text}
-        </div>
-      )}
     </div>
   );
 };

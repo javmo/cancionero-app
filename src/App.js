@@ -13,6 +13,7 @@ import SongCreationWizard from './components/wizard/SongCreationWizard';
 import SongChordSelector from './components/SongChordSelector';
 import LecturaSantosFiestas from './components/LecturasSantosFiestas';
 import ReflexionDetalle from './components/ReflexionDetalle';
+import CancionRelacionadaDetalle from './components/CancionRelacionadaDetalle';
 
 function App() {
   // Estado global del idioma
@@ -34,6 +35,7 @@ function App() {
         <Route path="/songChordSelector/:songId" element={<SongChordSelector />} />
         <Route path="/lecturaSantosFiestas" element={<LecturaSantosFiestas idioma={idioma} />} />
         <Route path="/reflexion/:id" element={<ReflexionDetalle />} />
+        <Route path="/cancionrelacionada/:id" element={<CancionRelacionadaDetalle />} />
         <Route path="/" element={<LecturaSantosFiestas idioma={idioma}  />} />
       </Routes>
     </Router>

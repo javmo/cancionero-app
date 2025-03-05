@@ -54,36 +54,21 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
   };
 
   const shareOnWhatsApp = () => {
-    if (!lecturas) return;
+    if (!lecturas || !lecturas["Evangelio"] || lecturas["Evangelio"] === "No disponible") return;
 
     const currentUrl = encodeURIComponent(window.location.href);
-    let mensaje = `✨ *${idioma === "la" ? "Lectiones Diei" : "Lecturas del Día"}* ✨\n📅 *Fecha:* ${fecha}\n\n`;
+    let mensaje = `✨ *Lectura del Evangelio de hoy* ✨\n📅 *Fecha:* ${fecha}\n\n`;
+    
+    mensaje += `📖 *Evangelio:*\n${lecturas["Evangelio"].normalize("NFKD")}\n\n`;
 
-    const agregarLecturaSiDisponible = (titulo, contenido) => {
-      if (contenido && contenido !== "No disponible") {
-        return `📖 *${traducirTitulo(titulo)}:*\n${contenido.normalize("NFKD")}\n\n`;
-      }
-      return "";
-    };
-
-    mensaje += agregarLecturaSiDisponible("Primera Lectura", lecturas["Primera lectura"]);
-    mensaje += agregarLecturaSiDisponible("Segunda Lectura", lecturas["Segunda lectura"]);
-    mensaje += agregarLecturaSiDisponible("Evangelio", lecturas["Evangelio"]);
-    mensaje += agregarLecturaSiDisponible("Ángelus", lecturas["Ángelus"]);
-
-    mensaje += `💭 *${
-      idioma === "la" ? "Quid tibi reliquerunt hae lectiones?" : "¿Qué te dejó esta lectura?"
-    }*\n✨\n\n`;
-    mensaje += `🎶 *${
-      idioma === "la" ? "Habesne carmen quod te movet?" : "¿Se te vino a la mente una canción especial?"
-    }*\n🎵🙌\n\n`;
-    mensaje += `🔗 *${
-      idioma === "la" ? "Participa et invenire plures cogitationes" : "Sumate a la conversación y encontrá más reflexiones"
-    }*\n${decodeURIComponent(currentUrl)}`;
+    mensaje += `💭 *¿Qué te dejó esta lectura?* Compartí tu reflexión, lo que te hizo pensar o sentir.\n\n`;
+    mensaje += `🎶 *¿Se te vino a la mente una canción especial?* Contanos qué tema te inspira hoy. 🎵🙌\n\n`;
+    mensaje += `🔗 *Sumate a la conversación y encontrá más reflexiones:* ${decodeURIComponent(currentUrl)}`;
 
     const encodedMessage = encodeURIComponent(mensaje);
     window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
   };
+
 
   return (
     <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg border-2 border-blue-400 mb-6 relative w-full max-w-3xl mx-auto">
@@ -126,38 +111,47 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
       </button>
 
       <div className="mt-6">
-        <button
-          onClick={() => {
-            setCargandoReflexiones(true);
-            setTimeout(() => {
-              setMostrarReflexiones(!mostrarReflexiones);
-              setCargandoReflexiones(false);
-            }, 500);
-          }}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105"
-        >
-          📝 {idioma === "la" ? "Cogitationes Diei" : "Reflexiones del Día"} ({reflexionCount})
-          <span>{cargandoReflexiones ? "Cargando..." : mostrarReflexiones ? "⬆" : "⬇"}</span>
-        </button>
-        {mostrarReflexiones && <Reflexiones fecha={fecha} />}
-      </div>
+  <button
+    onClick={() => {
+      setCargandoReflexiones(true);
+      setTimeout(() => {
+        setMostrarReflexiones(!mostrarReflexiones);
+        setCargandoReflexiones(false);
+      }, 500);
+    }}
+    className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105 hover:shadow-lg ${
+      mostrarReflexiones ? "border-2 border-white" : "border-none"
+    }`}
+  >
+    📝 {idioma === "la" ? "Cogitationes Diei" : "Reflexiones del Día"} ({reflexionCount})
+    <span className={`transition-transform ${mostrarReflexiones ? "rotate-180 text-yellow-300" : "text-white"}`}>
+      ⬇
+    </span>
+  </button>
+  {mostrarReflexiones && <Reflexiones fecha={fecha} />}
+</div>
 
-      <div className="mt-6">
-        <button
-          onClick={() => {
-            setCargandoCanciones(true);
-            setTimeout(() => {
-              setMostrarCanciones(!mostrarCanciones);
-              setCargandoCanciones(false);
-            }, 500);
-          }}
-          className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105"
-        >
-          🎶 {idioma === "la" ? "Cantiones ad Iter" : "Canciones para el Camino"} ({cancionCount})
-          <span>{cargandoCanciones ? "Cargando..." : mostrarCanciones ? "⬆" : "⬇"}</span>
-        </button>
-        {mostrarCanciones && <CancionesRelacionadas fecha={fecha} />}
-      </div>
+<div className="mt-6">
+  <button
+    onClick={() => {
+      setCargandoCanciones(true);
+      setTimeout(() => {
+        setMostrarCanciones(!mostrarCanciones);
+        setCargandoCanciones(false);
+      }, 500);
+    }}
+    className={`w-full bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105 hover:shadow-lg ${
+      mostrarCanciones ? "border-2 border-white" : "border-none"
+    }`}
+  >
+    🎶 {idioma === "la" ? "Cantiones ad Iter" : "Canciones para el Camino"} ({cancionCount})
+    <span className={`transition-transform ${mostrarCanciones ? "rotate-180 text-yellow-300" : "text-white"}`}>
+      ⬇
+    </span>
+  </button>
+  {mostrarCanciones && <CancionesRelacionadas fecha={fecha} lecturas={lecturas} />}
+</div>
+
     </div>
   );
 };
