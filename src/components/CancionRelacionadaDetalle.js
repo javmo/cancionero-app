@@ -52,7 +52,7 @@ const CancionRelacionadaDetalle = () => {
   const shareOnWhatsApp = () => {
     if (!lectura || !cancion) return;
 
-    const mensaje = `✨ *Evangelio del Día* ✨\n📅 *Fecha:* ${cancion.fecha}\n\n📖 *Evangelio:*\n${lectura["Evangelio"].substring(0, 300)}...\n\n🎶 *Canción recomendada:*\n📌 *${cancion.titulo}* (por ${cancion.nombre})\n🔗 ${cancion.link}\n\n📝 Reflexionemos y compartamos juntos! 🙌`;
+    const mensaje = `✨ *Evangelio del Día* ✨\n📅 *Fecha:* ${cancion.fecha}\n\n📖 *Evangelio:*\n${lectura["evangelio"].substring(0, 300)}...\n\n🎶 *Canción recomendada:*\n📌 *${cancion.titulo}* (por ${cancion.nombre})\n🔗 ${cancion.link}\n\n📝 Reflexionemos y compartamos juntos! 🙌`;
 
     const encodedMessage = encodeURIComponent(mensaje);
     window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
@@ -126,7 +126,7 @@ const CancionRelacionadaDetalle = () => {
         <div className="mt-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">📖 Lectura del Día</h2>
           <div className="p-4 bg-gray-50 rounded">
-            <p><strong>📜 Evangelio:</strong> {lectura["Evangelio"] || "No disponible"}</p>
+            <p><strong>📜 Evangelio:</strong> {lectura["evangelio"] || "No disponible"}</p>
           </div>
         </div>
       ) : (

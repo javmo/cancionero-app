@@ -38,13 +38,13 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
   const traducirTitulo = (titulo) => {
     if (idioma === "la") {
       switch (titulo) {
-        case "Primera lectura":
+        case "primeraLectura":
           return "Lectio Prima";
-        case "Segunda lectura":
+        case "segundaLectura":
           return "Lectio Secunda";
-        case "Evangelio":
+        case "evangelio":
           return "Evangelium";
-        case "Ángelus":
+        case "angelus":
           return "Angelus";
         default:
           return titulo;
@@ -54,12 +54,12 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
   };
 
   const shareOnWhatsApp = () => {
-    if (!lecturas || !lecturas["Evangelio"] || lecturas["Evangelio"] === "No disponible") return;
+    if (!lecturas || !lecturas.evangelio || lecturas.evangelio === "No disponible") return;
 
     const currentUrl = encodeURIComponent(window.location.href);
     let mensaje = `✨ *Lectura del Evangelio de hoy* ✨\n📅 *Fecha:* ${fecha}\n\n`;
-    
-    mensaje += `📖 *Evangelio:*\n${lecturas["Evangelio"].normalize("NFKD")}\n\n`;
+
+    mensaje += `📖 *Evangelio:*\n${lecturas.evangelio}\n\n`;
 
     mensaje += `💭 *¿Qué te dejó esta lectura?* Compartí tu reflexión, lo que te hizo pensar o sentir.\n\n`;
     mensaje += `🎶 *¿Se te vino a la mente una canción especial?* Contanos qué tema te inspira hoy. 🎵🙌\n\n`;
@@ -69,15 +69,15 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
     window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
   };
 
-
   return (
     <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg border-2 border-blue-400 mb-6 relative w-full max-w-3xl mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold text-blue-600 border-b-2 border-blue-400 pb-3 mb-4 text-center">
         📖 {idioma === "la" ? "Lectiones Diei" : "Lecturas del Día"}
       </h2>
       <div className="space-y-4 text-base md:text-lg text-gray-800">
-        {["Primera lectura", "Segunda lectura", "Evangelio", "Ángelus"].map((tipo) => {
-          if (lecturas[tipo] && lecturas[tipo] !== "No disponible") {
+        {["primeraLectura", "segundaLectura", "evangelio", "angelus"].map((tipo) => {
+          const contenido = lecturas?.[tipo] || "No disponible";
+          if (contenido !== "No disponible") {
             return (
               <div key={tipo}>
                 <p>
@@ -85,10 +85,10 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
                 </p>
                 <p className="text-gray-700 leading-relaxed">
                   {expandirLectura[tipo]
-                    ? lecturas[tipo]
-                    : `${lecturas[tipo].substring(0, 300)}...`}
+                    ? contenido
+                    : `${contenido.substring(0, 300)}...`}
                 </p>
-                {lecturas[tipo].length > 300 && (
+                {contenido.length > 300 && (
                   <button
                     onClick={() => toggleExpandir(tipo)}
                     className="text-blue-500 font-semibold hover:underline text-sm"
@@ -111,47 +111,42 @@ const Lecturas = ({ lecturas, fecha, idioma }) => {
       </button>
 
       <div className="mt-6">
-  <button
-    onClick={() => {
-      setCargandoReflexiones(true);
-      setTimeout(() => {
-        setMostrarReflexiones(!mostrarReflexiones);
-        setCargandoReflexiones(false);
-      }, 500);
-    }}
-    className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105 hover:shadow-lg ${
-      mostrarReflexiones ? "border-2 border-white" : "border-none"
-    }`}
-  >
-    📝 {idioma === "la" ? "Cogitationes Diei" : "Reflexiones del Día"} ({reflexionCount})
-    <span className={`transition-transform ${mostrarReflexiones ? "rotate-180 text-yellow-300" : "text-white"}`}>
-      ⬇
-    </span>
-  </button>
-  {mostrarReflexiones && <Reflexiones fecha={fecha} />}
-</div>
+        <button
+          onClick={() => {
+            setCargandoReflexiones(true);
+            setTimeout(() => {
+              setMostrarReflexiones(!mostrarReflexiones);
+              setCargandoReflexiones(false);
+            }, 500);
+          }}
+          className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105 hover:shadow-lg"
+        >
+          📝 {idioma === "la" ? "Cogitationes Diei" : "Reflexiones del Día"} ({reflexionCount})
+          <span className="transition-transform">
+            {mostrarReflexiones ? "⬆" : "⬇"}
+          </span>
+        </button>
+        {mostrarReflexiones && <Reflexiones fecha={fecha} />}
+      </div>
 
-<div className="mt-6">
-  <button
-    onClick={() => {
-      setCargandoCanciones(true);
-      setTimeout(() => {
-        setMostrarCanciones(!mostrarCanciones);
-        setCargandoCanciones(false);
-      }, 500);
-    }}
-    className={`w-full bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105 hover:shadow-lg ${
-      mostrarCanciones ? "border-2 border-white" : "border-none"
-    }`}
-  >
-    🎶 {idioma === "la" ? "Cantiones ad Iter" : "Canciones para el Camino"} ({cancionCount})
-    <span className={`transition-transform ${mostrarCanciones ? "rotate-180 text-yellow-300" : "text-white"}`}>
-      ⬇
-    </span>
-  </button>
-  {mostrarCanciones && <CancionesRelacionadas fecha={fecha} lecturas={lecturas} />}
-</div>
-
+      <div className="mt-6">
+        <button
+          onClick={() => {
+            setCargandoCanciones(true);
+            setTimeout(() => {
+              setMostrarCanciones(!mostrarCanciones);
+              setCargandoCanciones(false);
+            }, 500);
+          }}
+          className="w-full bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-md flex items-center justify-between text-lg transition-transform transform hover:scale-105 hover:shadow-lg"
+        >
+          🎶 {idioma === "la" ? "Cantiones ad Iter" : "Canciones para el Camino"} ({cancionCount})
+          <span className="transition-transform">
+            {mostrarCanciones ? "⬆" : "⬇"}
+          </span>
+        </button>
+        {mostrarCanciones && <CancionesRelacionadas fecha={fecha} lecturas={lecturas} />}
+      </div>
     </div>
   );
 };

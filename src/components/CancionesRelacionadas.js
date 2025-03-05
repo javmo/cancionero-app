@@ -86,10 +86,10 @@ const CancionesRelacionadas = ({ fecha, lecturas }) => {
 
   // Compartir en WhatsApp
   const shareOnWhatsApp = (cancion) => {
-    if (!lecturas || !lecturas["Evangelio"]) return;
+    if (!lecturas || !lecturas["evangelio"]) return;
 
     const cancionUrl = `${window.location.origin}/cancionrelacionada/${cancion._id}`;
-    const mensaje = `✨ *Evangelio del Día* ✨\n📅 *Fecha:* ${fecha}\n\n📖 *Evangelio:*\n${lecturas["Evangelio"].substring(0, 300)}...\n\n🎶 *Canción recomendada:*\n📌 *${cancion.titulo}* (por ${cancion.nombre})\n🔗 ${cancionUrl}\n\n📝 Reflexionemos y compartamos juntos! 🙌`;
+    const mensaje = `✨ *Evangelio del Día* ✨\n📅 *Fecha:* ${fecha}\n\n📖 *Evangelio:*\n${lecturas["evangelio"].substring(0, 300)}...\n\n🎶 *Canción recomendada:*\n📌 *${cancion.titulo}* (por ${cancion.nombre})\n🔗 ${cancionUrl}\n\n📝 Reflexionemos y compartamos juntos! 🙌`;
 
     const encodedMessage = encodeURIComponent(mensaje);
     window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");

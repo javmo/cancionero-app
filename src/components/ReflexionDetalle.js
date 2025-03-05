@@ -127,10 +127,10 @@ const ReflexionDetalle = () => {
         <div className="mt-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">📖 Lectura del Día</h2>
           <div className="p-4 bg-gray-50 rounded">
-            <p><strong>📜 Primera Lectura:</strong> {lectura["Primera lectura"] || "No disponible"}</p>
-            <p><strong>📜 Segunda Lectura:</strong> {lectura["Segunda lectura"] || "No disponible"}</p>
-            <p><strong>📜 Evangelio:</strong> {lectura["Evangelio"] || "No disponible"}</p>
-            <p><strong>🙏 Ángelus:</strong> {lectura["Ángelus"] || "No disponible"}</p>
+            <p><strong>📜 Primera Lectura:</strong> {lectura["primeraLectura"] || "No disponible"}</p>
+            <p><strong>📜 Segunda Lectura:</strong> {lectura["segundaLectura"] || "No disponible"}</p>
+            <p><strong>📜 Evangelio:</strong> {lectura["evangelio"] || "No disponible"}</p>
+            <p><strong>🙏 Ángelus:</strong> {lectura["angelus"] || "No disponible"}</p>
           </div>
         </div>
       ) : (
