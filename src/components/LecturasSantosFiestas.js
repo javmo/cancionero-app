@@ -62,7 +62,7 @@ const LecturasSantosFiestas = ({ idioma }) => {
   }, [fecha, idioma]);
 
   return (
-    <div className="max-w-3xl mx-auto p-4 md:p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+    <div className="max-w-3xl mx-auto p-4 md:p-6 bg-white shadow-lg rounded-lg border border-gray-200 overflow-y-auto">
       
       {/* Título Principal */}
       <h1 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 mb-6">
@@ -116,6 +116,9 @@ const LecturasSantosFiestas = ({ idioma }) => {
           <Fiestas fiestas={fiestas.fiestas} fecha={fecha} idioma={idioma} />
         </div>
       )}
+
+      {/* Espaciado adicional para evitar que el navbar tape contenido */}
+      <div className="h-20 md:h-0"></div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const Navbar = ({ idioma, setIdioma }) => {
   }
 
   return (
-    <nav className="bg-blue-500 p-3 shadow-lg fixed inset-x-0 bottom-0 md:relative md:inset-x-0 md:top-0 z-10 flex justify-between items-center">
+    <nav className="bg-blue-500 p-3 shadow-lg fixed inset-x-0 bottom-0 z-10 flex justify-between items-center md:relative md:top-0">
       {/* Menú de navegación */}
       <ul className="flex space-x-4 items-center">
         {[
