@@ -3,8 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import ReflexionService from "../services/ReflexionService";
 import ScrapingService from "../services/ScrapingService";
 import { 
-  FaShareAlt, FaArrowLeft, FaCheck, 
-  FaThumbsUp, FaLightbulb, FaBookOpen, FaCommentDots 
+  FaArrowLeft, FaCheck, 
+  FaThumbsUp, FaLightbulb, FaBookOpen, 
+  FaCommentDots, FaWhatsapp 
 } from "react-icons/fa";
 
 const reflexionService = new ReflexionService();
@@ -67,13 +68,17 @@ const ReflexionDetalle = () => {
 
   const handleShare = () => {
     const link = window.location.href;
-    navigator.clipboard.writeText(link);
+    const mensaje = `💭 *Mirá esta reflexión sobre el evangelio de hoy:*\n\n📜 *"${reflexion.comentario.substring(0, 200)}..."*\n\n🔗 Leéla completa acá: ${link}\n\n¿Te gustó? Contame qué pensás. 😊`;
+
+    const encodedMessage = encodeURIComponent(mensaje);
+    window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
+
     setShared(true);
     setTimeout(() => setShared(false), 2000);
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg pb-24">
       {/* Botón de regreso con una invitación motivadora */}
       <Link to="/lecturaSantosFiestas" className="text-blue-600 hover:underline flex items-center gap-2 mb-4 text-lg font-semibold">
         <FaArrowLeft />
@@ -89,7 +94,7 @@ const ReflexionDetalle = () => {
 
           <div className="p-4 bg-gray-50 border-l-4 border-blue-500 rounded-lg shadow-sm">
             <p className="text-lg font-semibold text-gray-900">✍️ {reflexion.nombre}</p>
-            <p className="text-gray-700 mt-2 leading-relaxed">{reflexion.comentario}</p>
+            <p className="text-gray-700 mt-2 leading-relaxed whitespace-pre-line">{reflexion.comentario}</p>
           </div>
 
           {/* Botones de interacción */}
@@ -114,13 +119,13 @@ const ReflexionDetalle = () => {
             </button>
           </div>
 
-          {/* Botón de compartir */}
+          {/* Botón de compartir en WhatsApp */}
           <button
             onClick={handleShare}
             className="mt-4 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 shadow-md"
           >
-            {shared ? <FaCheck className="text-green-500" /> : <FaShareAlt />}
-            {shared ? " Copiado" : " Compartir Reflexión"}
+            {shared ? <FaCheck className="text-green-500" /> : <FaWhatsapp />}
+            {shared ? " Enviado" : " Compartir en WhatsApp"}
           </button>
         </div>
       ) : (
