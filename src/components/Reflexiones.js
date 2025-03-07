@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ReflexionService from "../services/ReflexionService";
-import { FaThumbsUp, FaLightbulb, FaPaperPlane, FaShareAlt, FaInfoCircle, FaCheck } from "react-icons/fa";
+import { 
+  FaThumbsUp, FaLightbulb, FaPaperPlane, 
+  FaShareAlt, FaInfoCircle, FaCheck, FaWhatsapp 
+} from "react-icons/fa";
 import Tooltip from "@mui/material/Tooltip";
 
 const reflexionService = new ReflexionService();
@@ -74,29 +78,48 @@ const Reflexiones = ({ fecha }) => {
     }
   };
 
-  const handleShare = (id) => {
+  const handleShare = (id, comentario) => {
     const link = `${window.location.origin}/reflexion/${id}`;
-    navigator.clipboard.writeText(link);
+    const mensaje = `💭 *Te comparto esta reflexión que encontré hoy:*\n\n📜 *"${comentario.substring(0, 200)}..."*\n\n🔗 Leéla completa acá: ${link}\n\n`;
+
+    const encodedMessage = encodeURIComponent(mensaje);
+    window.open(`https://wa.me/?text=${encodedMessage}`, "_blank");
+
     setShared(id);
     setTimeout(() => setShared(null), 2000);
   };
 
   return (
-    <div className="bg-white p-1 md:p-6 rounded shadow-md mb-6 w-full max-w-3xl mx-auto">
-
-
+    <div className="bg-white p-4 md:p-6 rounded-lg shadow-md mb-6 w-full max-w-3xl mx-auto">
       {/* 📌 Sección 1: Lista de Reflexiones con Scroll Interno */}
-      <div className="max-h-80 overflow-y-auto space-y-4 mb-6 border border-gray-300 rounded p-3 md:p-6 bg-gray-50 shadow-inner">
+      <div className="max-h-80 overflow-y-auto space-y-4 mb-6 border border-gray-300 rounded-lg p-3 md:p-6 bg-gray-50 shadow-inner">
         {reflexiones.length > 0 ? (
           reflexiones.map((reflexion) => (
-            <div key={reflexion._id} className="border border-gray-200 rounded p-3 md:p-6 shadow bg-white">
+            <div key={reflexion._id} className="border border-gray-200 rounded-lg p-3 md:p-5 shadow bg-white">
               <p className="text-lg font-semibold text-gray-900">{reflexion.nombre}</p>
-              <p className="text-gray-700 text-base md:text-lg">{reflexion.comentario}</p>
-              <div className="flex items-center gap-4 mt-2">
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+                {reflexion.comentario.length > 300
+                  ? `${reflexion.comentario.substring(0, 300)}...`
+                  : reflexion.comentario}
+              </p>
+              {reflexion.comentario.length > 300 && (
+                <Link
+                  to={`/reflexion/${reflexion._id}`}
+                  className="text-blue-500 font-semibold hover:underline text-sm mt-2 inline-block"
+                >
+                  ➡️ Ver más
+                </Link>
+              )}
+
+              {/* Botones de interacción */}
+              <div className="flex items-center gap-4 mt-3">
                 <Tooltip title="Me gusta">
                   <button
                     onClick={() => handleVote(reflexion._id, "like")}
-                    className="flex items-center gap-1 text-blue-500 hover:text-blue-700 transition duration-200 text-base md:text-lg"
+                    className={`flex items-center gap-1 text-blue-500 hover:text-blue-700 transition duration-200 text-lg ${
+                      voted[reflexion._id] ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
+                    disabled={voted[reflexion._id]}
                   >
                     <FaThumbsUp /> {reflexion.likes}
                   </button>
@@ -104,66 +127,58 @@ const Reflexiones = ({ fecha }) => {
                 <Tooltip title="Me inspira">
                   <button
                     onClick={() => handleVote(reflexion._id, "inspirar")}
-                    className="flex items-center gap-1 text-yellow-500 hover:text-yellow-700 transition duration-200 text-base md:text-lg"
+                    className={`flex items-center gap-1 text-yellow-500 hover:text-yellow-700 transition duration-200 text-lg ${
+                      voted[reflexion._id] ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
+                    disabled={voted[reflexion._id]}
                   >
                     <FaLightbulb /> {reflexion.inspirador}
                   </button>
                 </Tooltip>
-                <Tooltip title="Compartir reflexión">
+                <Tooltip title="Compartir en WhatsApp">
                   <button
-                    onClick={() => handleShare(reflexion._id)}
-                    className="flex items-center gap-1 text-gray-500 hover:text-gray-700 transition duration-200 text-base md:text-lg"
+                    onClick={() => handleShare(reflexion._id, reflexion.comentario)}
+                    className="flex items-center gap-1 text-green-500 hover:text-green-700 transition duration-200 text-lg"
                   >
-                    {shared === reflexion._id ? <FaCheck className="text-green-500" /> : <FaShareAlt />} Compartir
+                    {shared === reflexion._id ? <FaCheck className="text-green-500" /> : <FaWhatsapp />} Compartir
                   </button>
                 </Tooltip>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-gray-500 text-center text-base md:text-lg">Sé el primero en compartir tu reflexión ✨</p>
+          <p className="text-gray-500 text-center text-base md:text-lg">
+            Sé el primero en compartir tu reflexión ✨
+          </p>
         )}
       </div>
 
       {/* 📌 Sección 2: Formulario para agregar reflexión */}
-      <div className="mb-4 p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
+      <div className="mb-4 p-3 bg-blue-50 border-l-4 border-blue-500 rounded-lg shadow-sm">
         <p className="flex items-center gap-2 font-semibold text-base md:text-lg">
           <FaInfoCircle className="text-blue-500" /> ¿Tenés algo que te haya hecho pensar hoy?
         </p>
         <p className="text-sm text-gray-700">
           Compartí con la comunidad una reflexión sobre la lectura del día. Puede ser algo que te inspiró,
-          una enseñanza que te llegó o simplemente unas palabras que te nacen del corazón. Animate a dejar tu huella. ✨
+          una enseñanza que te llegó o simplemente unas palabras que te nacen del corazón. ¡Animate a dejar tu huella! ✨
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-gray-50 p-3 md:p-4 rounded shadow">
+      <form onSubmit={handleSubmit} className="bg-gray-50 p-3 md:p-4 rounded-lg shadow">
         <textarea
-          className="w-full border border-gray-300 rounded p-2 text-base md:text-lg bg-white focus:ring focus:ring-blue-300"
+          className="w-full border border-gray-300 rounded-lg p-2 text-base md:text-lg bg-white focus:ring focus:ring-blue-300"
           placeholder="Escribe tu reflexión..."
           value={comentario}
           onChange={(e) => setComentario(e.target.value)}
         ></textarea>
-        <input
-          type="text"
-          className="border border-gray-300 rounded p-2 w-full text-base md:text-lg bg-white focus:ring focus:ring-blue-300"
-          placeholder="Tu nombre (opcional)"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />
         <button
           type="submit"
-          className="w-full flex justify-center items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow transition duration-300 text-base md:text-lg"
+          className="w-full flex justify-center items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow transition duration-300 text-base md:text-lg"
           disabled={loading}
         >
           {loading ? "Enviando..." : "Enviar Reflexión"} <FaPaperPlane />
         </button>
       </form>
-
-      {message && (
-        <div className={`p-3 mt-4 text-white rounded text-base md:text-lg ${message.type === "success" ? "bg-green-500" : "bg-red-500"}`}>
-          {message.text}
-        </div>
-      )}
     </div>
   );
 };

@@ -133,10 +133,7 @@ const ReflexionDetalle = () => {
             <FaBookOpen /> 📖 Lectura del Día
           </h2>
           <div className="p-4 bg-gray-50 rounded-lg border-l-4 border-green-500 shadow-sm">
-            <p className="text-gray-800 leading-relaxed"><strong>📜 Primera Lectura:</strong> {lectura["primeraLectura"] || "No disponible"}</p>
-            <p className="text-gray-800 leading-relaxed"><strong>📜 Segunda Lectura:</strong> {lectura["segundaLectura"] || "No disponible"}</p>
             <p className="text-gray-800 leading-relaxed"><strong>📜 Evangelio:</strong> {lectura["evangelio"] || "No disponible"}</p>
-            <p className="text-gray-800 leading-relaxed"><strong>🙏 Ángelus:</strong> {lectura["angelus"] || "No disponible"}</p>
           </div>
         </div>
       ) : (
